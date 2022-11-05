@@ -20,12 +20,14 @@ int SupprimerAdherent(int *nbAdherent, int tabNoCarte[], int tabEtatCarte[], int
     // Verification de l'existance de l'adherent
 
     int trouve = 0;
+    int indice = 0;
 
     for (int i = 0; i < *nbAdherent ; i++)
     {
         if (tabNoCarte[i] == cible)
         {
             trouve = 1;
+            indice = i;
             break;
         }
     }
@@ -45,15 +47,31 @@ int SupprimerAdherent(int *nbAdherent, int tabNoCarte[], int tabEtatCarte[], int
         
         if (rep == 'O')
         {
-            // APPEL DE L'AFFICHAGE DES ADHERENTS
+            // --> APPEL DE L'AFFICHAGE DES ADHERENTS
         }
     }
 
-    if (rep == 'O')
+    // Si la carte a été trouvée
+
+    else
+    {
+
+        // Suppression de l'adherent
+
+        for (int i = indice; i < *nbAdherent ; i++)
         {
-            printf("Souhaitez vous entrer un autre numéro d'adhérent");
+            tabNoCarte[i] = tabNoCarte[i+1];
+            tabEtatCarte[i] = tabEtatCarte[i+1];
+            tabPointCarte[i] = tabPointCarte[i+1];
         }
 
+        *nbAdherent -= 1;
+    }
+
+    /*
+        printf("Souhaitez vous entrer un autre numéro d'adhérent");
+           }
+    */
     return 0;
     
 }
