@@ -1,4 +1,5 @@
 #include "global.h"
+
 void help(int page);
 
 void SupprimerAdherent(int *nbAdherents, int tabNoCarte[], int tabEtatCarte[], int tabPointCarte[]);
