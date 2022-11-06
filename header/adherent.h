@@ -7,3 +7,5 @@ void AfficheAdherents(int tabNoCarte[], int tabEtatCarte[], int tabPointCarte[],
 void ligne(void);
 
 int AfficheInfosAdherent(int noCarte, int tabNoCarte[], int tabEtatCarte[], int tabPointCarte[], int nbAdherents);
+
+int TrouverAdherent(int tabNoCarte[], int nbAdherents, int noCarte, int *trouve);

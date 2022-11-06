@@ -234,27 +234,17 @@ void ligne(void)
  * @param tabEtatCarte [TABLEAU] Liste des états des cartes des adherents
  * @param tabPointCarte [TABLEAU] Liste des crédits pour chaque adhérent
  * @param nbAdherents [Taille Logique] Nombre d'adherents total
- * @return int [CODE ERR] 0 -> Tout s'est bien passé | 1 -> Numéro de carte introuvable
+ * @return int [CODE ERR] 0 -> Tout s'est bien passé | -1 -> Numéro de carte introuvable
  */
 int AfficheInfosAdherent(int noCarte, int tabNoCarte[], int tabEtatCarte[], int tabPointCarte[], int nbAdherents)
 {
-    int indice = 0, trouve = 0;
-
-    // Vérifier l'existance du numéro de carte et si existe récupération de son indice
-    for (int i = 0; i < nbAdherents; i++)
-    {
-        if (tabNoCarte[i] == noCarte)
-        {
-            indice = i;
-            trouve = 1;
-        }
-    }
+    int trouve = 0, indice = TrouverAdherent(tabNoCarte, nbAdherents, noCarte, &trouve); // Vérifier l'éxistance de l'adherent
 
     // Affichage
     clean
 
     // Traitement du résultat de la recherche
-    if (!trouve)
+    if (!trouve && indice != -1)
     {
         printf("Adherent %d introuvable.\n", noCarte);
 
@@ -270,3 +260,30 @@ int AfficheInfosAdherent(int noCarte, int tabNoCarte[], int tabEtatCarte[], int 
         return 0;
     }
 }
+
+/**
+ * @brief Permet de déterminer si un adhérent existe et si oui de récupérer son indice
+ * 
+ * @param tabNoCarte [TABLEAU] Liste des adhérents
+ * @param nbAdherents [Taille Logique] Nombre d'adhérents
+ * @param noCarte Numéro d'adhérent que l'on cherche
+ * @param trouve [POINTEUR] Vaut par défaut 0. Prend la valeur 1 si l'adhérent est trouvé
+ * @return int -1 -> Adhérent introuvable | Autre -> Indice de l'adherent
+ */
+int TrouverAdherent(int tabNoCarte[], int nbAdherents, int noCarte, int *trouve)
+{
+    int indice = 0, trouve = 0;
+
+    // Vérifier l'existance du numéro de carte et si existe récupération de son indice
+    for (int i = 0; i < nbAdherents; i++)
+    {
+        if (tabNoCarte[i] == noCarte)
+        {   
+            return i;
+            *trouve = 1;
+        }
+    }
+
+    return -1;
+}
+
