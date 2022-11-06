@@ -226,7 +226,16 @@ void ligne(void)
     printf("|\n");
 }
 
-
+/**
+ * @brief Affiche les informations d'un adhérent
+ * 
+ * @param noCarte Numéro d'adhérent pour lequel on cherche des informations
+ * @param tabNoCarte [TABLEAU] Liste des adherents
+ * @param tabEtatCarte [TABLEAU] Liste des états des cartes des adherents
+ * @param tabPointCarte [TABLEAU] Liste des crédits pour chaque adhérent
+ * @param nbAdherents [Taille Logique] Nombre d'adherents total
+ * @return int [CODE ERR] 0 -> Tout s'est bien passé | 1 -> Numéro de carte introuvable
+ */
 int AfficheInfosAdherent(int noCarte, int tabNoCarte[], int tabEtatCarte[], int tabPointCarte[], int nbAdherents)
 {
     int indice = 0, trouve = 0;
