@@ -7,4 +7,5 @@
 
 #ifdef _WIN32
 #define clean system("cls");
+#define color system("color 70");
 #endif
