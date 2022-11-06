@@ -165,8 +165,7 @@ void AfficheAdherents(int tabNoCarte[], int tabEtatCarte[], int tabPointCarte[],
         clean
         printf("LISTE DES ADHERENTS\n");
 
-
-        printf("\n\t| Numero adherent | Etat Carte | CREDIT DE LA CARTE |\n");
+        printf("\n\t| NUMERO ADHERENT | ETAT DE LA CARTE | CREDIT DE LA CARTE |\n");
 
         for (int i = min; i < max; i++)
         {
@@ -244,7 +243,7 @@ int AfficheInfosAdherent(int noCarte, int tabNoCarte[], int tabEtatCarte[], int 
     clean
 
     // Traitement du résultat de la recherche
-    if (!trouve && indice == -1)
+    if (!trouve && indice != -1)
     {
         printf("Adherent %d introuvable.\n", noCarte);
 
@@ -270,6 +269,7 @@ int AfficheInfosAdherent(int noCarte, int tabNoCarte[], int tabEtatCarte[], int 
  * @param trouve [POINTEUR] Vaut par défaut 0. Prend la valeur 1 si l'adhérent est trouvé
  * @return int -1 -> Adhérent introuvable | Autre -> Indice de l'adherent
  */
+
 int TrouverAdherent(int tabNoCarte[], int nbAdherents, int noCarte, int *trouve)
 {
     // Vérifier l'existance du numéro de carte et si existe récupération de son indice
@@ -285,3 +285,47 @@ int TrouverAdherent(int tabNoCarte[], int nbAdherents, int noCarte, int *trouve)
     return -1;
 }
 
+void RechargeCarte(int noCarte, int tabNoCarte[], int tabEtatCarte[], int tabPointCarte[], int nbAdherents)
+{
+    char rep;
+    int trouve = 0, actif = 1;
+    int indice = TrouverAdherent(tabNoCarte, nbAdherents, noCarte, &trouve);
+
+    while (actif)
+    {
+        if (!trouve && indice == -1)
+        {
+            printf("Adherent %d introuvable. Souhaitez-vous rechercher un autre adherent (O/N) : ", noCarte);
+            scanf(" %c%*c", &rep); 
+
+            while (rep != 'N' && rep != 'O')
+            {
+                clean
+                printf("Reponse incorrecte. Souhaitez vous entrer un autre numero d'adherent (O/N) : ");
+                printf("\nrep : %c\n", rep);
+                scanf(" %c%*c", &rep);
+                printf("\nRep : %c\n", rep);
+            }
+
+            if(rep == 'N')
+            {
+                clean
+                printf("\nRetour au menu principal.\n");
+                actif = 0 ;
+            }
+            else
+            {
+                clean
+                printf("Numéro d'adhérent à recharger : ");
+                scanf(" %d%*c", &noCarte);
+
+                indice = TrouverAdherent(tabNoCarte, nbAdherents, noCarte, &trouve);
+            }
+        }
+        else
+        {
+            AfficheInfosAdherent(noCarte, tabNoCarte, tabEtatCarte, tabPointCarte, nbAdherents);
+            actif = 0;
+        }
+    }
+}

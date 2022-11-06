@@ -11,8 +11,8 @@ int main(void){
     int taillePhysique = 15;
     int tailleLog = 15;
 
-    int err = AfficheInfosAdherent(15, tabCarte, tabEtat, tabPoint, tailleLog);
-    //SupprimerAdherent(&tailleLog, tabCarte, tabEtat, tabPoint);
+    //int err = AfficheInfosAdherent(15, tabCarte, tabEtat, tabPoint, tailleLog);
+    SupprimerAdherent(&tailleLog, tabCarte, tabEtat, tabPoint);
     //AfficheAdherents(tabCarte, tabEtat, tabPoint, tailleLog);
-
+    //RechargeCarte(30, tabCarte, tabEtat, tabPoint, tailleLog);
 }

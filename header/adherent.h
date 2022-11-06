@@ -9,3 +9,5 @@ void ligne(void);
 int AfficheInfosAdherent(int noCarte, int tabNoCarte[], int tabEtatCarte[], int tabPointCarte[], int nbAdherents);
 
 int TrouverAdherent(int tabNoCarte[], int nbAdherents, int noCarte, int *trouve);
+
+void RechargeCarte(int noCarte, int tabNoCarte[], int tabEtatCarte[], int tabPointCarte[], int nbAdherents);
