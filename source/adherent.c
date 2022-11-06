@@ -17,12 +17,12 @@ void help(int page){
 /**
  * @brief Supprime un adherent
  * 
- * @param nbAdherent [POINTEUR] Nombre d'adhérent total
+ * @param nbAdherents [POINTEUR - Taille Logique] Nombre d'adhérents total 
  * @param tabNoCarte [TABLEAU] Liste des numéros de cartes des adhérents
  * @param tabEtatCarte [TABLEAU] Liste des états des cartes des adhérents
  * @param tabPointCarte [TABLEAU] Liste des points sur les cartes des adhérents
  */
-void SupprimerAdherent(int *nbAdherent, int tabNoCarte[], int tabEtatCarte[], int tabPointCarte[])
+void SupprimerAdherent(int *nbAdherents, int tabNoCarte[], int tabEtatCarte[], int tabPointCarte[])
 {
     int cible, boucle = 0;
     char rep;
@@ -47,7 +47,7 @@ void SupprimerAdherent(int *nbAdherent, int tabNoCarte[], int tabEtatCarte[], in
         // Verification de l'existance de l'adherent
 
 
-        for (int i = 0; i < *nbAdherent ; i++)
+        for (int i = 0; i < *nbAdherents ; i++)
         {
             if (tabNoCarte[i] == cible)
             {
@@ -73,7 +73,7 @@ void SupprimerAdherent(int *nbAdherent, int tabNoCarte[], int tabEtatCarte[], in
             
             if (rep == 'O')
             {
-                AfficheAdherents(tabNoCarte, tabEtatCarte, tabPointCarte, *nbAdherent);
+                AfficheAdherents(tabNoCarte, tabEtatCarte, tabPointCarte, *nbAdherents);
             }
         }
 
@@ -95,7 +95,7 @@ void SupprimerAdherent(int *nbAdherent, int tabNoCarte[], int tabEtatCarte[], in
             // Suppression de l'adherent
             if (rep == 'O')
             {
-                for (int i = indice; i < *nbAdherent ; i++)
+                for (int i = indice; i < *nbAdherents ; i++)
                 {
                     tabNoCarte[i] = tabNoCarte[i+1];
                     tabEtatCarte[i] = tabEtatCarte[i+1];
@@ -105,7 +105,7 @@ void SupprimerAdherent(int *nbAdherent, int tabNoCarte[], int tabEtatCarte[], in
                 clean
                 printf("Adherent supprime.\n");
 
-            *nbAdherent -= 1;
+            *nbAdherents -= 1;
             }
 
             // Suppression annulée
@@ -124,7 +124,7 @@ void SupprimerAdherent(int *nbAdherent, int tabNoCarte[], int tabEtatCarte[], in
         while (rep != 'N' && rep != 'O')
         {
             clean
-            printf("Reponse incorrecte. Confirmez vous la suppression de l'adherent %d (O/N) : ", tabNoCarte[indice]);
+            printf("Reponse incorrecte. Souhaitez vous entrer un autre numero d'adherent (O/N) : ");
             scanf("%*c%c", &rep);
         }
 
@@ -143,21 +143,21 @@ void SupprimerAdherent(int *nbAdherent, int tabNoCarte[], int tabEtatCarte[], in
  * @param tabNoCarte [TABLEAU] Liste des cartes des adhérents
  * @param tabEtatCarte [TABLEAU] Liste des états des cartes des adhérents
  * @param tabPointCarte [TABLEAU] Liste des points des adhérents
- * @param tailleLog Nombre d'adhérents
+ * @param nbAdherents [TAILLE LOGIQUE] Nombre d'adhérents
  */
-void AfficheAdherents(int tabNoCarte[], int tabEtatCarte[], int tabPointCarte[], int tailleLog)
+void AfficheAdherents(int tabNoCarte[], int tabEtatCarte[], int tabPointCarte[], int nbAdherents)
 {
     int commande, actif = 1;
-    int nbPages = tailleLog/10 + 1, noPage = 1;
+    int nbPages = nbAdherents/10 + 1, noPage = 1;
     char trash;
 
     //Détermine les adhérents à afficher au début
     int min = 0, max;
 
-    if (tailleLog>= 10)
+    if (nbAdherents>= 10)
         max = 9;
     else
-        max = tailleLog;
+        max = nbAdherents;
 
     // Boucle d'affichage
     while (actif)
@@ -171,7 +171,7 @@ void AfficheAdherents(int tabNoCarte[], int tabEtatCarte[], int tabPointCarte[],
         for (int i = min; i < max; i++)
         {
             ligne();    
-            printf("\t| %15d | %10d | %18d |\n", tabNoCarte[i], tabEtatCarte[i], tabPointCarte[i]);
+            printf("\t| %15d | %16d | %18d |\n", tabNoCarte[i], tabEtatCarte[i], tabPointCarte[i]);
 
         }
 
@@ -201,8 +201,8 @@ void AfficheAdherents(int tabNoCarte[], int tabEtatCarte[], int tabPointCarte[],
         
         //Détermine la page (et son contenu) à  afficher
         min = (noPage-1)*10;
-        if (noPage*10 > tailleLog)
-            max = tailleLog;
+        if (noPage*10 > nbAdherents)
+            max = nbAdherents;
         else
             max = noPage*10;
     }         
@@ -215,13 +215,49 @@ void AfficheAdherents(int tabNoCarte[], int tabEtatCarte[], int tabPointCarte[],
 void ligne(void)
 {
     printf("\t|");
-    for (int i = 0; i < 51; i++)
+    for (int i = 0; i < 57; i++)
     {
 
-        if(i == 17 || i == 30)
+        if(i == 17 || i == 36)
             printf("|");
         else
-            printf("-");
+            printf("-");    
     }
     printf("|\n");
+}
+
+
+int AfficheInfosAdherent(int noCarte, int tabNoCarte[], int tabEtatCarte[], int tabPointCarte[], int nbAdherents)
+{
+    int indice = 0, trouve = 0;
+
+    // Vérifier l'existance du numéro de carte et si existe récupération de son indice
+    for (int i = 0; i < nbAdherents; i++)
+    {
+        if (tabNoCarte[i] == noCarte)
+        {
+            indice = i;
+            trouve = 1;
+        }
+    }
+
+    // Affichage
+    clean
+
+    // Traitement du résultat de la recherche
+    if (!trouve)
+    {
+        printf("Adherent %d introuvable.\n", noCarte);
+
+        return -1;
+    }
+    else
+    {
+        printf("Information de l'adherent %d : \n", noCarte);
+        printf("\n\t| NUMERO ADHERENT | ETAT DE LA CARTE | CREDIT DE LA CARTE |\n");
+        ligne();
+        printf("\t| %15d | %16d | %18d |\n", tabNoCarte[indice], tabEtatCarte[indice], tabPointCarte[indice]);
+        
+        return 0;
+    }
 }
