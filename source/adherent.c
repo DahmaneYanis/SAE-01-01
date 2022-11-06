@@ -61,14 +61,14 @@ void SupprimerAdherent(int *nbAdherents, int tabNoCarte[], int tabEtatCarte[], i
         if (trouve == 0)
         {
             printf("\nNumero de carte %d inexistant. Souhaitez vous un affichage detaille des adherents (O/N) : ", cible);
-            scanf("%*c%c", &rep);
+            scanf(" %c", &rep);
 
             // Verification de la validité de la réponse
             while (rep != 'N' && rep != 'O')
             {
                 clean
                 printf("Reponse incorrecte. Souhaitez vous un affichage detaille des adherents (O/N) : ");
-                scanf("%*c%c", &rep);
+                scanf(" %c", &rep);
             }
             
             if (rep == 'O')
@@ -83,14 +83,14 @@ void SupprimerAdherent(int *nbAdherents, int tabNoCarte[], int tabEtatCarte[], i
         {
             clean
             printf("Adherent trouve. Voici ses informations :\nNumero de carte : %d\nEtat de la carte : %d\nPoint(s) sur la carte : %d\nConfirmez vous la suppression de l'adherent (O/N) : ", tabNoCarte[indice], tabEtatCarte[indice], tabPointCarte[indice]);
-            scanf("%*c%c", &rep);
+            scanf(" %c", &rep);
 
             // Verification de la validité de la réponse
             while (rep != 'N' && rep != 'O')
             {
                 clean
                 printf("Reponse incorrecte. Confirmez vous la suppression de l'adherent %d (O/N) : ", tabNoCarte[indice]);
-                scanf("%*c%c", &rep);
+                scanf(" %c", &rep);
             }
             // Suppression de l'adherent
             if (rep == 'O')
@@ -118,14 +118,14 @@ void SupprimerAdherent(int *nbAdherents, int tabNoCarte[], int tabEtatCarte[], i
 
         // Test pour savoir si on supprime encore un adhérent ou si on retourne au menu principal
         printf("\nSouhaitez vous entrer un autre numero d'adherent (O/N) : ");
-        scanf("%*c%c", &rep);
+        scanf(" %c", &rep);
         clean
 
         while (rep != 'N' && rep != 'O')
         {
             clean
             printf("Reponse incorrecte. Souhaitez vous entrer un autre numero d'adherent (O/N) : ");
-            scanf("%*c%c", &rep);
+            scanf(" %c", &rep);
         }
 
         if(rep == 'N')
@@ -277,8 +277,9 @@ int TrouverAdherent(int tabNoCarte[], int nbAdherents, int noCarte, int *trouve)
     {
         if (tabNoCarte[i] == noCarte)
         {   
-            return i;
             *trouve = 1;
+            return i;
+
         }
     }
 
@@ -287,6 +288,7 @@ int TrouverAdherent(int tabNoCarte[], int nbAdherents, int noCarte, int *trouve)
 
 void RechargeCarte(int noCarte, int tabNoCarte[], int tabEtatCarte[], int tabPointCarte[], int nbAdherents)
 {
+    clean
     char rep;
     int trouve = 0, actif = 1;
     int indice = TrouverAdherent(tabNoCarte, nbAdherents, noCarte, &trouve);
@@ -296,14 +298,14 @@ void RechargeCarte(int noCarte, int tabNoCarte[], int tabEtatCarte[], int tabPoi
         if (!trouve && indice == -1)
         {
             printf("Adherent %d introuvable. Souhaitez-vous rechercher un autre adherent (O/N) : ", noCarte);
-            scanf(" %c%*c", &rep); 
+            scanf(" %c", &rep); 
 
             while (rep != 'N' && rep != 'O')
             {
                 clean
                 printf("Reponse incorrecte. Souhaitez vous entrer un autre numero d'adherent (O/N) : ");
                 printf("\nrep : %c\n", rep);
-                scanf(" %c%*c", &rep);
+                scanf(" %c", &rep);
                 printf("\nRep : %c\n", rep);
             }
 
@@ -316,8 +318,8 @@ void RechargeCarte(int noCarte, int tabNoCarte[], int tabEtatCarte[], int tabPoi
             else
             {
                 clean
-                printf("Numéro d'adhérent à recharger : ");
-                scanf(" %d%*c", &noCarte);
+                printf("Numero d'adherent a recharger : ");
+                scanf(" %d", &noCarte);
 
                 indice = TrouverAdherent(tabNoCarte, nbAdherents, noCarte, &trouve);
             }
