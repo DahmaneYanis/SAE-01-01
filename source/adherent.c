@@ -11,95 +11,115 @@
  */
 int SupprimerAdherent(int *nbAdherent, int tabNoCarte[], int tabEtatCarte[], int tabPointCarte[])
 {
-    int cible;
-    char rep = 'N';
-
-    printf("\nBienvenue sur le menu de suppression d'adherents.\nEntrer le numero de la carte de l'adherent que vous souhaitez supprimer : ");
-    scanf("%d", &cible);
-    clean
-
-    // Verification de l'existance de l'adherent
+    int cible, boucle = 0;
+    char rep;
 
     int trouve = 0;
     int indice = 0;
+    
+    int exit = 0;
 
-    for (int i = 0; i < *nbAdherent ; i++)
+    clean
+    printf("\nBienvenue sur le menu de suppression d'adherents.\n");
+    
+    while (!exit)
     {
-        if (tabNoCarte[i] == cible)
+        trouve = 0;
+        indice = 0;
+
+        printf("Entrer le numero de la carte de l'adherent que vous souhaitez supprimer : ");
+        scanf("%d", &cible);
+        clean
+
+        // Verification de l'existance de l'adherent
+
+
+        for (int i = 0; i < *nbAdherent ; i++)
         {
-            trouve = 1;
-            indice = i;
-            break;
+            if (tabNoCarte[i] == cible)
+            {
+                trouve = 1;
+                indice = i;
+                break;
+            }
         }
-    }
 
-    // Si la carte de l'adherent n'existe pas
-    if (trouve == 0)
-    {
-        printf("\nNumero de carte %d inexistant. Souhaitez vous un affichage détaille des adherents (O/N) : ");
-        scanf("%*c%c", &rep);
+        // Si la carte de l'adherent n'existe pas
+        if (trouve == 0)
+        {
+            printf("\nNumero de carte %d inexistant. Souhaitez vous un affichage detaille des adherents (O/N) : ", cible);
+            scanf("%*c%c", &rep);
 
-        // Verification de la validité de la réponse
-        while (rep != 'N' && rep != 'O')
+            // Verification de la validité de la réponse
+            while (rep != 'N' && rep != 'O')
+            {
+                clean
+                printf("Reponse incorrecte. Souhaitez vous un affichage detaille des adherents (O/N) : ");
+                scanf("%*c%c", &rep);
+            }
+            
+            if (rep == 'O')
+            {
+                // AfficheAdherents(); --> APPEL DE L'AFFICHAGE DES ADHERENTS
+            }
+        }
+
+        // Si la carte a été trouvée
+
+        else
         {
             clean
-            printf("Reponse incorrecte. Souhaitez vous un affichage détaille des adherents (O/N) : ");
+            printf("Adherent trouve. Voici ses informations :\nNumero de carte : %d\nEtat de la carte : %d\nPoint(s) sur la carte : %d\nConfirmez vous la suppression de l'adherent (O/N) : ", tabNoCarte[indice], tabEtatCarte[indice], tabPointCarte[indice]);
             scanf("%*c%c", &rep);
-        }
-        
-        if (rep == 'O')
-        {
-            // AfficheAdherents(); --> APPEL DE L'AFFICHAGE DES ADHERENTS
-        }
-    }
 
-    // Si la carte a été trouvée
+            // Verification de la validité de la réponse
+            while (rep != 'N' && rep != 'O')
+            {
+                clean
+                printf("Reponse incorrecte. Confirmez vous la suppression de l'adherent %d (O/N) : ", tabNoCarte[indice]);
+                scanf("%*c%c", &rep);
+            }
+            // Suppression de l'adherent
+            if (rep == 'O')
+            {
+                for (int i = indice; i < *nbAdherent ; i++)
+                {
+                    tabNoCarte[i] = tabNoCarte[i+1];
+                    tabEtatCarte[i] = tabEtatCarte[i+1];
+                    tabPointCarte[i] = tabPointCarte[i+1];
+                }
+                
+                clean
+                printf("Adherent supprime.\n");
 
-    else
-    {
+            *nbAdherent -= 1;
+            }
+
+            // Suppression annulée
+            else
+            {
+                clean
+                printf("Suppression annulee.\n");
+            }
+        }
+
+        // Test pour savoir si on supprime encore un adhérent ou si on retourne au menu principal
+        printf("\nSouhaitez vous entrer un autre numero d'adherent (O/N) : ");
+        scanf("%*c%c", &rep);
         clean
-        printf("Adherent trouve. Voici ses informations :\nNumero de carte : %d\nEtat de la carte : %d\nPoint(s) sur la carte : %d\nConfirmez vous la suppression de l'adherent (O/N) : ", tabNoCarte[indice], tabEtatCarte[indice], tabPointCarte[indice]);
-        
-        // Verification de la validité de la réponse
+
         while (rep != 'N' && rep != 'O')
         {
             clean
             printf("Reponse incorrecte. Confirmez vous la suppression de l'adherent %d (O/N) : ", tabNoCarte[indice]);
             scanf("%*c%c", &rep);
         }
-        // Suppression de l'adherent
-        if (rep == 'O')
-        {
-            for (int i = indice; i < *nbAdherent ; i++)
-            {
-                tabNoCarte[i] = tabNoCarte[i+1];
-                tabEtatCarte[i] = tabEtatCarte[i+1];
-                tabPointCarte[i] = tabPointCarte[i+1];
-            }
-            
-            clean
-            printf("Adherent supprime.\n");
 
-        *nbAdherent -= 1;
-        }
-
-        // Suppression annulée
-        else
+        if(rep == 'N')
         {
             clean
-            printf("Suppression annulee.\n");
+            exit = 1;
+            printf("Retour au menu principal.\n");
         }
-    }
-
-    printf("\nSouhaitez vous entrer un autre numéro d'adhérent (O/N) : ");
-    scanf("%*c%c", &rep);
-    clean
-
-    if(rep == 'N')
-    {
-        clean
-        printf("Retour au menu principal.\n");
-    }
-    return 0;
-    
+    }   
 }
