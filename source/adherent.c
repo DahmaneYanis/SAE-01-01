@@ -286,6 +286,15 @@ int TrouverAdherent(int tabNoCarte[], int nbAdherents, int noCarte, int *trouve)
     return -1;
 }
 
+/**
+ * @brief Recharge une carte d'adhérent
+ * 
+ * @param noCarte Carte à rechargée
+ * @param tabNoCarte [TABLEAU] Liste des adhérents
+ * @param tabEtatCarte [TABLEAU] Liste des états des cartes des adhérents
+ * @param tabPointCarte [TABLEAU] Liste des crédits des cartes des adhérents
+ * @param nbAdherents [Taille Logique] Nombre d'adhérents total
+ */
 void RechargeCarte(int noCarte, int tabNoCarte[], int tabEtatCarte[], int tabPointCarte[], int nbAdherents)
 {
     clean
