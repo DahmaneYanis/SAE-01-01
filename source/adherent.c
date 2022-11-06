@@ -311,7 +311,7 @@ void RechargeCarte(int noCarte, int tabNoCarte[], int tabEtatCarte[], int tabPoi
         // Si l'adhérent cherché n'existe pas
         if (!trouve && indice == -1)
         {
-            printf("Souhaitez-vous rechercher un autre adherent (O/N) : ", noCarte);
+            printf("Carte adherente introuvable. Souhaitez-vous rechercher un autre adherent (O/N) : ", noCarte);
             scanf(" %c", &rep); 
 
             while (rep != 'N' && rep != 'O')
@@ -346,7 +346,7 @@ void RechargeCarte(int noCarte, int tabNoCarte[], int tabEtatCarte[], int tabPoi
             AfficheInfosAdherent(noCarte, tabNoCarte, tabEtatCarte, tabPointCarte, nbAdherents);
             
             printf("\nVoulez-vous toujours recharger la carte numero %d (O/N) : ", noCarte);
-            scanf(" %c", rep);
+            scanf(" %c", &rep);
 
             while (rep != 'N' && rep != 'O')
             {
@@ -357,8 +357,33 @@ void RechargeCarte(int noCarte, int tabNoCarte[], int tabEtatCarte[], int tabPoi
 
             // Annulation de la recharge
             if (rep == 'N')
-                actif = 0;
+            {
+                clean
+                printf("Transaction annulee.\nSouhaitez-vous faire une nouvelle transaction de credit (O/N) : ");
+                scanf(" %c", &rep);
 
+                while (rep != 'N' && rep != 'O')
+                {
+                    clean
+                    printf("Reponse incorrecte. Souhaitez-vous faire une nouvelle transaction de credit (O/N) : ");
+                    scanf(" %c", &rep);
+                }
+
+                // Fin de programme
+                if (rep == 'N')
+                    actif = 0;
+
+                // Relancment du programme avec une nouvelle carte adhérente
+                else
+                {
+                    clean
+                    printf("Numero carte d'adherent a recharger : ");
+                    scanf(" %d", &noCarte);
+
+                    indice = TrouverAdherent(tabNoCarte, nbAdherents, noCarte, &trouve);
+                }
+            }
+            
             // Validation de la volonté de recharger
             else
             {
@@ -368,7 +393,41 @@ void RechargeCarte(int noCarte, int tabNoCarte[], int tabEtatCarte[], int tabPoi
                 scanf(" %d", &credit);
 
                 // Vérification de l'état de la carte
-                if (tabEtatCarte[indice] != 1)
+
+                // Si la carte est activée
+                if (tabEtatCarte[indice] == 1)
+                {
+                    tabPointCarte[indice] += credit;
+                    AfficheInfosAdherent(noCarte, tabNoCarte, tabEtatCarte, tabPointCarte, nbAdherents);
+                
+                    printf("\nTransaction de %d credits faite.\n", credit);
+                    printf("Souhaitez-vous faire une nouvelle transaction de credit (O/N) : ");
+                    scanf(" %c", &rep);
+
+                    while (rep != 'N' && rep != 'O')
+                    {
+                        clean
+                        printf("Reponse incorrecte. Souhaitez-vous faire une nouvelle transaction de credit (O/N) : ");
+                        scanf(" %c", &rep);
+                    }
+
+                    // Nouveau rechargement de carte
+                    if (rep == 'O')
+                    {
+                        clean
+                        printf("Numero carte d'adherent a recharger : ");
+                        scanf(" %d", &noCarte);
+
+                        indice = TrouverAdherent(tabNoCarte, nbAdherents, noCarte, &trouve);
+                    }
+
+                    // Fin de programme
+                    else
+                        actif = 0;
+                }
+
+                // Si la carte est désactivée
+                else
                 {
                     clean
                     printf("Etat de la carte actuel : %d", tabEtatCarte[indice]);
@@ -388,13 +447,32 @@ void RechargeCarte(int noCarte, int tabNoCarte[], int tabEtatCarte[], int tabPoi
                         tabEtatCarte[indice] = 1;
                         tabPointCarte[indice] += credit;
                         clean
-                        printf("Carte reactivee. Transaction de %d credits faite.\n", credit);
                         AfficheInfosAdherent(noCarte, tabNoCarte, tabEtatCarte, tabPointCarte, nbAdherents);
                     
-                        printf("\nAppuyer sur entree pour continuer...");
-                        scanf("%*c%c", &trash);
+                        printf("\nTransaction de %d credits faite.\n", credit);
+                        printf("Souhaitez-vous faire une nouvelle transaction de credit (O/N) : ");
+                        scanf(" %c", &rep);
 
-                        actif = 0;
+                        while (rep != 'N' && rep != 'O')
+                        {
+                            clean
+                            printf("Reponse incorrecte. Souhaitez-vous faire une nouvelle transaction de credit (O/N) : ");
+                            scanf(" %c", &rep);
+                        }
+
+                        // Nouveau rechargement de carte
+                        if (rep == 'O')
+                        {
+                            clean
+                            printf("Numero carte d'adherent a recharger : ");
+                            scanf(" %d", &noCarte);
+
+                            indice = TrouverAdherent(tabNoCarte, nbAdherents, noCarte, &trouve);
+                        }
+
+                        // Fin de programme
+                        else
+                            actif = 0;
                     }
 
                     // Etat de la carte non modifié
@@ -415,21 +493,39 @@ void RechargeCarte(int noCarte, int tabNoCarte[], int tabEtatCarte[], int tabPoi
                         if (rep == 'O')
                         {
                             tabPointCarte[indice] += credit;
-                            clean
-                            printf("Transaction de %d credits faite.\n", credit);
                             AfficheInfosAdherent(noCarte, tabNoCarte, tabEtatCarte, tabPointCarte, nbAdherents);
 
-                            printf("\nAppuyer sur entree pour continuer...");
-                            scanf("%*c%c", &trash);
+                            printf("\nTransaction de %d credits faite.\n", credit);
+                            printf("Souhaitez-vous faire une nouvelle transaction de credit (O/N) : ");
+                            scanf(" %c", &rep);
 
-                            actif = 0;
+                            while (rep != 'N' && rep != 'O')
+                            {
+                                clean
+                                printf("Reponse incorrecte. Souhaitez-vous faire une nouvelle transaction de credit (O/N) : ");
+                                scanf(" %c", &rep);
+                            }
+
+                            // Nouveau rechargement de carte
+                            if (rep == 'O')
+                            {
+                                clean
+                                printf("Numero carte d'adherent a recharger : ");
+                                scanf(" %d", &noCarte);
+
+                                indice = TrouverAdherent(tabNoCarte, nbAdherents, noCarte, &trouve);
+                            }
+
+                            // Fin de programme
+                            else
+                                actif = 0;
                         }
 
                         // Annulation de la transaction car carte annulée
                         else
                         {
                             clean
-                            printf("Transaction annulée.\nSouhaitez-vous faire une nouvelle transaction de credit (O/N) : ");
+                            printf("Transaction annulee.\nSouhaitez-vous faire une nouvelle transaction de credit (O/N) : ");
                             scanf(" %c", &rep);
 
                             while (rep != 'N' && rep != 'O')
@@ -453,11 +549,8 @@ void RechargeCarte(int noCarte, int tabNoCarte[], int tabEtatCarte[], int tabPoi
                                 indice = TrouverAdherent(tabNoCarte, nbAdherents, noCarte, &trouve);
                             }
                         }   
-                    
                     }
-
                 }
-                
             }
         }
     }
