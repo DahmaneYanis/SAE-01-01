@@ -11,3 +11,5 @@ int AfficheInfosAdherent(int noCarte, int tabNoCarte[], int tabEtatCarte[], int 
 int TrouverAdherent(int tabNoCarte[], int nbAdherents, int noCarte, int *trouve);
 
 void RechargeCarte(int noCarte, int tabNoCarte[], int tabEtatCarte[], int tabPointCarte[], int nbAdherents);
+
+void CreerAdherent(int tabNoCarte[], int tabEtatCarte[], int tabPointCarte[], int *nbAdherents, int taillePhysique);

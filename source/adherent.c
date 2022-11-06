@@ -269,7 +269,6 @@ int AfficheInfosAdherent(int noCarte, int tabNoCarte[], int tabEtatCarte[], int 
  * @param trouve [POINTEUR] Vaut par défaut 0. Prend la valeur 1 si l'adhérent est trouvé
  * @return int -1 -> Adhérent introuvable | Autre -> Indice de l'adherent
  */
-
 int TrouverAdherent(int tabNoCarte[], int nbAdherents, int noCarte, int *trouve)
 {
     // Vérifier l'existance du numéro de carte et si existe récupération de son indice
@@ -553,5 +552,98 @@ void RechargeCarte(int noCarte, int tabNoCarte[], int tabEtatCarte[], int tabPoi
                 }
             }
         }
+    }
+}
+
+/**
+ * @brief Creer un nouvel adherent à la fin du tableau si la taille physique le permet
+ * 
+ * @param tabNoCarte [TABLEAU] Liste des adherents
+ * @param tabEtatCarte [TABLEAU] Etats des adherents
+ * @param tabPointCarte [TABLEAU] Credit des adherents
+ * @param nbAdherents  [POINTEUR - Taille Logique] Nombre d'adhérents total
+ * @param taillePhysique [Taille Physique]
+ */
+void CreerAdherent(int tabNoCarte[], int tabEtatCarte[], int tabPointCarte[], int *nbAdherents, int taillePhysique)
+{
+    int dispo = 0, indice = 0, actif = 1;
+    int i;
+
+    int credit;
+    char rep;
+    
+    while(actif)
+    {
+        // Verification de la posibilité de créer un nouvel adhérent (taille physique du tableau)
+        if (taillePhysique <=  *nbAdherents)
+        {
+            printf("Taille physique du tableau pas assez elevee.\n");
+            return;
+        }
+
+        i = 0;
+
+        // Recherche d'un numéro disponible 
+        while(!dispo)
+        {
+            dispo = 1;
+            for (int j = 0 ; j < *nbAdherents ; j++)
+            {
+                if (tabNoCarte[j] == i)
+                    dispo = 0;
+            }
+
+            if(dispo)
+                indice = i;
+    
+            i++;
+        }
+
+        // Ajout de l'adhérent à la fin du tableau (tableau trié plus tard)
+        *nbAdherents+=1; // ++ ne marche pas
+
+        clean
+        printf("Credit de l'adherent : ");
+        scanf("%d", &credit);
+
+        tabNoCarte[*nbAdherents-1] = indice;
+        tabEtatCarte[*nbAdherents-1] = 1;
+        tabPointCarte[*nbAdherents-1] = credit;
+
+        clean
+        printf("Adherent cree. Souhaitez vous un affichage detaille des adherents (O/N) : ");
+        scanf(" %c", &rep);
+
+        // Verification de la validité de la réponse
+        while (rep != 'N' && rep != 'O')
+        {
+            clean
+            printf("Reponse incorrecte. Souhaitez vous un affichage detaille des adherents (O/N) : ");
+            scanf(" %c", &rep);
+        }
+
+        if (rep == 'O')
+        {
+            AfficheAdherents(tabNoCarte, tabEtatCarte, tabPointCarte, *nbAdherents);
+        }
+
+        clean
+        printf("Souhaitez vous creer un autre adherent (O/N) : ");
+        scanf(" %c", &rep);
+
+        // Verification de la validité de la réponse
+        while (rep != 'N' && rep != 'O')
+        {
+            clean
+            printf("Reponse incorrecte. Souhaitez vous creer un autre adherent (O/N) : ");
+            scanf(" %c", &rep);
+        }
+
+        if (rep == 'N')
+        {
+            actif = 0;
+        }
+        else 
+            dispo = 0;
     }
 }
