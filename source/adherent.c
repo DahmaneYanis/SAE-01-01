@@ -244,7 +244,7 @@ int AfficheInfosAdherent(int noCarte, int tabNoCarte[], int tabEtatCarte[], int 
     clean
 
     // Traitement du résultat de la recherche
-    if (!trouve && indice != -1)
+    if (!trouve && indice == -1)
     {
         printf("Adherent %d introuvable.\n", noCarte);
 
@@ -272,8 +272,6 @@ int AfficheInfosAdherent(int noCarte, int tabNoCarte[], int tabEtatCarte[], int 
  */
 int TrouverAdherent(int tabNoCarte[], int nbAdherents, int noCarte, int *trouve)
 {
-    int indice = 0, trouve = 0;
-
     // Vérifier l'existance du numéro de carte et si existe récupération de son indice
     for (int i = 0; i < nbAdherents; i++)
     {
