@@ -37,15 +37,15 @@ void SupprimerAdherent(int *nbAdherents, int tabNoCarte[], int tabEtatCarte[], i
     
     while (!exit)
     {
-        trouve = 0;
-        indice = 0;
+
 
         printf("Entrer le numero de la carte de l'adherent que vous souhaitez supprimer : ");
         scanf("%d", &cible);
         clean
 
         // Verification de l'existance de l'adherent
-
+        trouve = 0;
+        indice = TrouverAdherent(tabNoCarte, *nbAdherents, cible, &trouve);
 
         for (int i = 0; i < *nbAdherents ; i++)
         {
@@ -82,7 +82,9 @@ void SupprimerAdherent(int *nbAdherents, int tabNoCarte[], int tabEtatCarte[], i
         else
         {
             clean
-            printf("Adherent trouve. Voici ses informations :\nNumero de carte : %d\nEtat de la carte : %d\nPoint(s) sur la carte : %d\nConfirmez vous la suppression de l'adherent (O/N) : ", tabNoCarte[indice], tabEtatCarte[indice], tabPointCarte[indice]);
+            AfficheInfosAdherent(cible, tabNoCarte, tabEtatCarte, tabPointCarte, *nbAdherents);
+            
+            printf("\nConfirmez vous la suppression de l'adherent (O/N) : ");
             scanf(" %c", &rep);
 
             // Verification de la validité de la réponse
