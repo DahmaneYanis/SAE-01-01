@@ -101,7 +101,7 @@ int AffichageGestionCompteAdherent(void)
 void GestionCompteAdherent(int tabNoCarte[], int tabEtatCarte[], int tabPointCarte[], int *nbAdherents, int taillePhysique)
 {
     int actif = 1;
-    int choix;
+    int choix, cible;
     char trash;
 
     while(actif)
@@ -110,7 +110,7 @@ void GestionCompteAdherent(int tabNoCarte[], int tabEtatCarte[], int tabPointCar
         switch(choix)
         {
             case 0 : actif = 0; break;
-            case 1 : AfficheAdherents(tabNoCarte, tabEtatCarte, tabPointCarte, *nbAdherents);break;
+            case 1 : cible = CibleInfosAdherent(); AfficheInfosAdherent(cible, tabNoCarte, tabEtatCarte, tabPointCarte, *nbAdherents);break;
             case 2 : CreerAdherent(tabNoCarte, tabEtatCarte, tabPointCarte, nbAdherents, taillePhysique);break;
             case 3 : SupprimerAdherent(nbAdherents, tabNoCarte, tabEtatCarte, tabPointCarte);break;
             default : 
@@ -120,4 +120,19 @@ void GestionCompteAdherent(int tabNoCarte[], int tabEtatCarte[], int tabPointCar
                 scanf("%c", &trash);
         }
     }
+}
+
+/**
+ * @brief Récupère le numéro de carte de l'adhérent pour lequel on souhaite obtenir les informations
+ * 
+ * @return int Numéro de carte de l'adhérent cible
+ */
+int CibleInfosAdherent(void)
+{
+    int cible;
+    clean
+    printf("Numero de carte de l'adherent : ");
+    scanf("%d", &cible);
+    return cible;
+
 }
