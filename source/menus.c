@@ -2,6 +2,11 @@
 #include "../header/adherent.h"
 
 
+/**
+ * @brief Permet l'affichage de GestionAdherent
+ * 
+ * @return int Choix de l'utilisateur
+ */
 int AffichageGestionAdherent(void)
 {
     int choix;
@@ -22,6 +27,15 @@ int AffichageGestionAdherent(void)
     return choix;
 }
 
+/**
+ * @brief Menu des gestions des adhérents
+ * 
+ * @param tabNoCarte [TABLEAU] Liste des adherents
+ * @param tabEtatCarte [TABLEAU] Etats des cartes
+ * @param tabPointCarte [TABLEAU] Crédit des cartes
+ * @param nbAdherents [POINTEUR - Taille Logique] Nombre d'adhérents 
+ * @param taillePhysique [Taille Physique]
+ */
 void GestionAdherent(int tabNoCarte[], int tabEtatCarte[], int tabPointCarte[], int *nbAdherents, int taillePhysique)
 {
     int actif = 1;
