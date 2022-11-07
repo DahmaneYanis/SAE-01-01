@@ -54,35 +54,29 @@ void GestionAdherent(int tabNoCarte[], int tabEtatCarte[], int tabPointCarte[], 
             default : 
                 clean 
                 printf("\nChoix invalide.\n");
-                printf("Appuyez sur entree pour continuer...");
-                scanf("%c", &trash);
+                wait
         }
     }
 }
-
-#include "../header/menus.h"
-#include "../header/adherent.h"
-
 
 /**
  * @brief Permet l'affichage de GestionCompteAdherent
  * 
  * @return int Choix de l'utilisateur
  */
-int AffichageGestionCompteAdherent(void)
+int AffichageGestionCompteAdherent(int cible)
 {
     int choix;
     
-    clean
-    printf("===============================================================\n");
-    printf("\t\tMENU GESTION D'UN COMPTE ADHERENT\n");
-    printf("===============================================================\n");
+    AfficheBandeauGCA();
+    printf("[ADHERENT %d]\n", cible);
 
     printf("\nChoix disponible :\n");
     printf("\t0. Retour au menu principal\n");
     printf("\t1. Afficher les infos d'un adherent\n");
     printf("\t2. Recharger une carte\n");
     printf("\t3. Desactiver/activer une carte\n");
+    printf("\t4. Changer d'adherent\n");
 
     printf("\nChoix : ");
     scanf("%d", &choix);
@@ -95,44 +89,74 @@ int AffichageGestionCompteAdherent(void)
  * @param tabNoCarte [TABLEAU] Liste des adherents
  * @param tabEtatCarte [TABLEAU] Etats des cartes
  * @param tabPointCarte [TABLEAU] Crédit des cartes
- * @param nbAdherents [POINTEUR - Taille Logique] Nombre d'adhérents 
- * @param taillePhysique [Taille Physique]
+ * @param nbAdherents [Taille Logique] Nombre d'adhérents 
  */
-void GestionCompteAdherent(int tabNoCarte[], int tabEtatCarte[], int tabPointCarte[], int *nbAdherents, int taillePhysique)
+void GestionCompteAdherent(int tabNoCarte[], int tabEtatCarte[], int tabPointCarte[], int nbAdherents)
 {
     int actif = 1;
     int choix, cible;
     char trash;
 
+    cible = CibleAdherent(tabNoCarte, nbAdherents); // Numéro de la carte de l'adhérent que l'on va traiter
+
     while(actif)
     {
-        choix = AffichageGestionAdherent();
+        choix = AffichageGestionCompteAdherent(cible);
         switch(choix)
         {
             case 0 : actif = 0; break;
-            case 1 : cible = CibleInfosAdherent(); AfficheInfosAdherent(cible, tabNoCarte, tabEtatCarte, tabPointCarte, *nbAdherents);break;
-            case 2 : CreerAdherent(tabNoCarte, tabEtatCarte, tabPointCarte, nbAdherents, taillePhysique);break;
-            case 3 : SupprimerAdherent(nbAdherents, tabNoCarte, tabEtatCarte, tabPointCarte);break;
+            case 1 : AfficheInfosAdherent(cible, tabNoCarte, tabEtatCarte, tabPointCarte, nbAdherents); wait break;
+            case 2 : RechargeCarte(cible, tabNoCarte, tabEtatCarte, tabPointCarte, nbAdherents); break;
+            case 3 : actif = 0/*code temporaire à remplacer par Appel de la fontion Activation/Desactivation de la carte*/; break;
+            case 4 : cible = CibleAdherent(tabNoCarte, nbAdherents); break;
             default : 
                 clean 
+                AfficheBandeauGCA();
                 printf("\nChoix invalide.\n");
-                printf("Appuyez sur entree pour continuer...");
-                scanf("%c", &trash);
+                wait
         }
     }
 }
 
 /**
- * @brief Récupère le numéro de carte de l'adhérent pour lequel on souhaite obtenir les informations
+ * @brief Récupère le numéro de carte de l'adhérent à traiter
  * 
  * @return int Numéro de carte de l'adhérent cible
  */
-int CibleInfosAdherent(void)
+int CibleAdherent(int tabNoCarte[], int nbAdherents)
 {
     int cible;
-    clean
-    printf("Numero de carte de l'adherent : ");
-    scanf("%d", &cible);
-    return cible;
+    
+    int trouve = 0;
+    int indice = 0;
 
+    clean
+    while(!trouve)
+    {
+        AfficheBandeauGCA();
+        if(indice == -1)
+        {
+            printf("\nNumero de l'adherent inexistant.");
+        }
+        printf("\nNumero de carte de l'adherent a traiter : ");
+        scanf("%d", &cible);
+        indice = TrouverAdherent(tabNoCarte, nbAdherents, cible, &trouve);
+
+        clean
+        
+    }
+    
+    return cible;
+}
+
+/**
+ * @brief Affichage du bandeau du menu GestionCompteAdherent
+ * 
+ */
+void AfficheBandeauGCA(void)
+{
+    clean
+    printf("===============================================================\n");
+    printf("\t\tMENU GESTION D'UN COMPTE ADHERENT\n");
+    printf("===============================================================\n");
 }

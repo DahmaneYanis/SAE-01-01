@@ -22,5 +22,7 @@ int main(void){
     //int indice = TrouverAdherent(tabCarte, tailleLog, 5, &trouve);
     //printf("Indice: %d\nTrouve = %d", indice, trouve);
     //CreerAdherent(tabCarte, tabEtat, tabPoint, &tailleLog, taillePhysique);
-    GestionAdherent(tabCarte, tabEtat, tabPoint, &tailleLog, taillePhysique);
+    //GestionAdherent(tabCarte, tabEtat, tabPoint, &tailleLog, taillePhysique);
+    GestionCompteAdherent(tabCarte, tabEtat, tabPoint, tailleLog);
+
 }

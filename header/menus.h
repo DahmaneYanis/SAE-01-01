@@ -3,8 +3,8 @@
 void GestionAdherent(int tabNoCarte[], int tabEtatCarte[], int tabPointCarte[], int *nbAdherents, int taillePhysique);
 int AffichageGestionAdherent(void);
 
-int AffichageGestionCompteAdherent(void);
-void GestionCompteAdherent();
-int CibleInfosAdherent(void);
-
+int AffichageGestionCompteAdherent(int cible);
+void GestionCompteAdherent(int tabNoCarte[], int tabEtatCarte[], int tabPointCarte[], int nbAdherents);
+int CibleAdherent(int tabNoCarte[], int nbAdherents);
+void AfficheBandeauGCA(void);
 

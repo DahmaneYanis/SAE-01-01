@@ -61,14 +61,14 @@ void SupprimerAdherent(int *nbAdherents, int tabNoCarte[], int tabEtatCarte[], i
         if (trouve == 0)
         {
             printf("\nNumero de carte %d inexistant. Souhaitez vous un affichage detaille des adherents (O/N) : ", cible);
-            scanf(" %c", &rep);
+            _rep_
 
             // Verification de la validité de la réponse
             while (rep != 'N' && rep != 'O')
             {
                 clean
                 printf("Reponse incorrecte. Souhaitez vous un affichage detaille des adherents (O/N) : ");
-                scanf(" %c", &rep);
+                _rep_
             }
             
             if (rep == 'O')
@@ -85,14 +85,14 @@ void SupprimerAdherent(int *nbAdherents, int tabNoCarte[], int tabEtatCarte[], i
             AfficheInfosAdherent(cible, tabNoCarte, tabEtatCarte, tabPointCarte, *nbAdherents);
             
             printf("\nConfirmez vous la suppression de l'adherent (O/N) : ");
-            scanf(" %c", &rep);
+            _rep_
 
             // Verification de la validité de la réponse
             while (rep != 'N' && rep != 'O')
             {
                 clean
                 printf("Reponse incorrecte. Confirmez vous la suppression de l'adherent %d (O/N) : ", tabNoCarte[indice]);
-                scanf(" %c", &rep);
+                _rep_
             }
             // Suppression de l'adherent
             if (rep == 'O')
@@ -120,14 +120,14 @@ void SupprimerAdherent(int *nbAdherents, int tabNoCarte[], int tabEtatCarte[], i
 
         // Test pour savoir si on supprime encore un adhérent ou si on retourne au menu principal
         printf("\nSouhaitez vous entrer un autre numero d'adherent (O/N) : ");
-        scanf(" %c", &rep);
+        _rep_
         clean
 
         while (rep != 'N' && rep != 'O')
         {
             clean
             printf("Reponse incorrecte. Souhaitez vous entrer un autre numero d'adherent (O/N) : ");
-            scanf(" %c", &rep);
+            _rep_
         }
 
         if(rep == 'N')
@@ -191,8 +191,7 @@ void AfficheAdherents(int tabNoCarte[], int tabEtatCarte[], int tabPointCarte[],
             if (noPage+commande > nbPages || noPage+commande < 1)
             {
                 help(1);
-                printf("\nAppuyer sur entree pour continuer...");
-                scanf("%*c%c", &trash);
+                wait
             }
             else
             {
@@ -313,13 +312,13 @@ void RechargeCarte(int noCarte, int tabNoCarte[], int tabEtatCarte[], int tabPoi
         if (!trouve && indice == -1)
         {
             printf("Carte adherente introuvable. Souhaitez-vous rechercher un autre adherent (O/N) : ", noCarte);
-            scanf(" %c", &rep); 
+            _rep_ 
 
             while (rep != 'N' && rep != 'O')
             {
                 clean
                 printf("Reponse incorrecte. Souhaitez vous entrer un autre numero d'adherent (O/N) : ");
-                scanf(" %c", &rep);
+                _rep_
             }
 
             // Abandon de la recharge
@@ -347,13 +346,13 @@ void RechargeCarte(int noCarte, int tabNoCarte[], int tabEtatCarte[], int tabPoi
             AfficheInfosAdherent(noCarte, tabNoCarte, tabEtatCarte, tabPointCarte, nbAdherents);
             
             printf("\nVoulez-vous toujours recharger la carte numero %d (O/N) : ", noCarte);
-            scanf(" %c", &rep);
+            _rep_
 
             while (rep != 'N' && rep != 'O')
             {
                 clean
                 printf("Reponse incorrecte. Voulez-vous toujours recharger la carte numero %d (O/N) : ", noCarte);
-                scanf(" %c", &rep);
+                _rep_
             }
 
             // Annulation de la recharge
@@ -361,13 +360,13 @@ void RechargeCarte(int noCarte, int tabNoCarte[], int tabEtatCarte[], int tabPoi
             {
                 clean
                 printf("Transaction annulee.\nSouhaitez-vous faire une nouvelle transaction de credit (O/N) : ");
-                scanf(" %c", &rep);
+                _rep_
 
                 while (rep != 'N' && rep != 'O')
                 {
                     clean
                     printf("Reponse incorrecte. Souhaitez-vous faire une nouvelle transaction de credit (O/N) : ");
-                    scanf(" %c", &rep);
+                    _rep_
                 }
 
                 // Fin de programme
@@ -403,13 +402,13 @@ void RechargeCarte(int noCarte, int tabNoCarte[], int tabEtatCarte[], int tabPoi
                 
                     printf("\nTransaction de %d credits faite.\n", credit);
                     printf("Souhaitez-vous faire une nouvelle transaction de credit (O/N) : ");
-                    scanf(" %c", &rep);
+                    _rep_
 
                     while (rep != 'N' && rep != 'O')
                     {
                         clean
                         printf("Reponse incorrecte. Souhaitez-vous faire une nouvelle transaction de credit (O/N) : ");
-                        scanf(" %c", &rep);
+                        _rep_
                     }
 
                     // Nouveau rechargement de carte
@@ -433,13 +432,13 @@ void RechargeCarte(int noCarte, int tabNoCarte[], int tabEtatCarte[], int tabPoi
                     clean
                     printf("Etat de la carte actuel : %d", tabEtatCarte[indice]);
                     printf("\nVoulez-vous la reactiver (O/N) : ");
-                    scanf(" %c", &rep);
+                    _rep_
 
                     while (rep != 'N' && rep != 'O')
                     {
                         clean
                         printf("Reponse incorrecte.\nEtat de la carte actuel : %d. Voulez-vous reactiver la carte numero %d (O/N) : ", tabEtatCarte[indice], noCarte);
-                        scanf(" %c", &rep);
+                        _rep_
                     }
 
                     // Réactivation de la carte et ajout des crédits
@@ -452,13 +451,13 @@ void RechargeCarte(int noCarte, int tabNoCarte[], int tabEtatCarte[], int tabPoi
                     
                         printf("\nTransaction de %d credits faite.\n", credit);
                         printf("Souhaitez-vous faire une nouvelle transaction de credit (O/N) : ");
-                        scanf(" %c", &rep);
+                        _rep_
 
                         while (rep != 'N' && rep != 'O')
                         {
                             clean
                             printf("Reponse incorrecte. Souhaitez-vous faire une nouvelle transaction de credit (O/N) : ");
-                            scanf(" %c", &rep);
+                            _rep_
                         }
 
                         // Nouveau rechargement de carte
@@ -481,13 +480,13 @@ void RechargeCarte(int noCarte, int tabNoCarte[], int tabEtatCarte[], int tabPoi
                     {
                         clean
                         printf("Souhaitez-vous effectuer quand meme la transaction de %d credit (O/N) : ", credit);
-                        scanf(" %c", &rep);
+                        _rep_
                     
                         while (rep != 'N' && rep != 'O')
                         {
                             clean
                             printf("Reponse incorrecte. Souhaitez-vous effectuer quand meme la transaction de %d credit (O/N) : ", credit);
-                            scanf(" %c", &rep);
+                            _rep_
                         }
                         
                         // Mettre des crédits sans réactiver la carte
@@ -498,13 +497,13 @@ void RechargeCarte(int noCarte, int tabNoCarte[], int tabEtatCarte[], int tabPoi
 
                             printf("\nTransaction de %d credits faite.\n", credit);
                             printf("Souhaitez-vous faire une nouvelle transaction de credit (O/N) : ");
-                            scanf(" %c", &rep);
+                            _rep_
 
                             while (rep != 'N' && rep != 'O')
                             {
                                 clean
                                 printf("Reponse incorrecte. Souhaitez-vous faire une nouvelle transaction de credit (O/N) : ");
-                                scanf(" %c", &rep);
+                                _rep_
                             }
 
                             // Nouveau rechargement de carte
@@ -527,13 +526,13 @@ void RechargeCarte(int noCarte, int tabNoCarte[], int tabEtatCarte[], int tabPoi
                         {
                             clean
                             printf("Transaction annulee.\nSouhaitez-vous faire une nouvelle transaction de credit (O/N) : ");
-                            scanf(" %c", &rep);
+                            _rep_
 
                             while (rep != 'N' && rep != 'O')
                             {
                                 clean
                                 printf("Reponse incorrecte. Souhaitez-vous faire une nouvelle transaction de credit (O/N) : ");
-                                scanf(" %c", &rep);
+                                _rep_
                             }
 
                             // Fin de programme
@@ -614,14 +613,14 @@ void CreerAdherent(int tabNoCarte[], int tabEtatCarte[], int tabPointCarte[], in
 
         clean
         printf("Adherent cree. Souhaitez vous un affichage detaille des adherents (O/N) : ");
-        scanf(" %c", &rep);
+        _rep_
 
         // Verification de la validité de la réponse
         while (rep != 'N' && rep != 'O')
         {
             clean
             printf("Reponse incorrecte. Souhaitez vous un affichage detaille des adherents (O/N) : ");
-            scanf(" %c", &rep);
+            _rep_
         }
 
         if (rep == 'O')
@@ -631,14 +630,14 @@ void CreerAdherent(int tabNoCarte[], int tabEtatCarte[], int tabPointCarte[], in
 
         clean
         printf("Souhaitez vous creer un autre adherent (O/N) : ");
-        scanf(" %c", &rep);
+        _rep_
 
         // Verification de la validité de la réponse
         while (rep != 'N' && rep != 'O')
         {
             clean
             printf("Reponse incorrecte. Souhaitez vous creer un autre adherent (O/N) : ");
-            scanf(" %c", &rep);
+            _rep_
         }
 
         if (rep == 'N')
