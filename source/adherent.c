@@ -649,4 +649,3 @@ void CreerAdherent(int tabNoCarte[], int tabEtatCarte[], int tabPointCarte[], in
             dispo = 0;
     }
 }
-//
