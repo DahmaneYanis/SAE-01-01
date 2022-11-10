@@ -398,6 +398,8 @@ void RechargeCarte(int noCarte, int tabNoCarte[], int tabEtatCarte[], int tabPoi
                 {
                     tabPointCarte[indice] += credit;
                     AfficheInfosAdherent(noCarte, tabNoCarte, tabEtatCarte, tabPointCarte, nbAdherents);
+
+                    Bonus(indice, tabPointCarte);
                 
                     printf("\nTransaction de %d credits faite.\n", credit);
                     printf("Souhaitez-vous faire une nouvelle transaction de credit (O/N) : ");
@@ -445,6 +447,9 @@ void RechargeCarte(int noCarte, int tabNoCarte[], int tabEtatCarte[], int tabPoi
                     {
                         tabEtatCarte[indice] = 1;
                         tabPointCarte[indice] += credit;
+
+                        Bonus(indice, tabPointCarte); // Verification du statut
+
                         clean
                         AfficheInfosAdherent(noCarte, tabNoCarte, tabEtatCarte, tabPointCarte, nbAdherents);
                     
@@ -494,6 +499,7 @@ void RechargeCarte(int noCarte, int tabNoCarte[], int tabEtatCarte[], int tabPoi
                             tabPointCarte[indice] += credit;
                             AfficheInfosAdherent(noCarte, tabNoCarte, tabEtatCarte, tabPointCarte, nbAdherents);
 
+                            Bonus(indice, tabEtatCarte);
                             printf("\nTransaction de %d credits faite.\n", credit);
                             printf("Souhaitez-vous faire une nouvelle transaction de credit (O/N) : ");
                             _rep_
@@ -551,6 +557,44 @@ void RechargeCarte(int noCarte, int tabNoCarte[], int tabEtatCarte[], int tabPoi
                     }
                 }
             }
+        }
+    }
+}
+
+/**
+ * @brief Permet de déterminer si le client peut gagner 20 points bonus en fonction de sa catégorie sociale
+ * 
+ * @param indice Indice de l'adherent cible
+ * @param tabPointCarte [TABLEAU] Liste des crédits des adherents
+ */
+void Bonus(int indice, int tabPointCarte[])
+{
+    int rep, trash, actif = 1, valable;
+    clean
+    printf("Le client fait-il parti d'une des catégories sociales suivantes (O/N) :\n");
+    printf("\t- Handicape\n");
+    printf("\t- Retraite\n");
+    printf("\t- Etudiant\n");
+    printf("Choix : ");
+    _rep_
+
+    while(actif)
+    {
+        switch(rep)
+        {
+            case 'O':
+                tabPointCarte[indice] += 20;
+                actif = 0;
+                break;
+            case 'N': 
+                actif = 0;
+                break;
+            default :
+                clean
+                printf("Reponse non valable.\n\n");
+
+                wait
+                break;
         }
     }
 }
