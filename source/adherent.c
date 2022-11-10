@@ -78,7 +78,6 @@ void SupprimerAdherent(int *nbAdherents, int tabNoCarte[], int tabEtatCarte[], i
         }
 
         // Si la carte a été trouvée
-
         else
         {
             clean
@@ -582,7 +581,7 @@ void CreerAdherent(int tabNoCarte[], int tabEtatCarte[], int tabPointCarte[], in
             return;
         }
 
-        i = 0;
+        i = 1;
 
         // Recherche d'un numéro disponible 
         while(!dispo)
@@ -612,7 +611,9 @@ void CreerAdherent(int tabNoCarte[], int tabEtatCarte[], int tabPointCarte[], in
         tabPointCarte[*nbAdherents-1] = credit;
 
         clean
-        printf("Adherent cree. Souhaitez vous un affichage detaille des adherents (O/N) : ");
+        printf("Adherent cree.\n");
+        AfficheInfosAdherent(indice, tabNoCarte, tabEtatCarte, tabPointCarte, *nbAdherents);
+        printf("\nSouhaitez vous un affichage detaille des adherents (O/N) : ");
         _rep_
 
         // Verification de la validité de la réponse
