@@ -165,7 +165,7 @@ void AfficheBandeauGCA(void)
 
 /*======================================================================================================*/
 
-void MenuActivite(int  Tab_numero_activite[], int Tab_tarif_activite[],int  Tab_nbr_entree_activite[],int  Tab_numero_carte_adherent[], int  Tab_Etat_carte[], int  Tab_credit_carte[], int  Tab_Presence_adherent[], int nbr_activite, int nbAdherents ) // Menu des activités
+void MenuActivite(int  Tab_numero_activite[], int Tab_tarif_activite[],int  Tab_nbr_entree_activite[],int  Tab_numero_carte_adherent[], int  Tab_Etat_carte[], int  Tab_credit_carte[], int  Tab_Presence_adherent[], int nbr_activite, int nbAdherents, int Tab_nom_activite[100][20] ) // Menu des activités
 {
     int choix = 0; //Variable qui récupère la volonté de l'utilisateur
     system("cls");
@@ -178,18 +178,17 @@ void MenuActivite(int  Tab_numero_activite[], int Tab_tarif_activite[],int  Tab_
     printf("- 4.) Supprimer une activite\n\n\n");
     scanf("%d%*c",&choix);  //On récupère le choix de l'utilisateur
 
-    while(choix < 1 || choix > 5 ) // Tant que le choix est inférieur à 1 ou supérieur à 4, on renvoie le menu
+    while(choix < 1 || choix > 4 ) // Tant que le choix est inférieur à 1 ou supérieur à 4, on renvoie le menu
     {
-    system("cls");
+    clean;
 
     printf("\n\nERREUR DANS LA SAISIE DU CHOIX ! \n\n - Veuillez choisir a nouveau\n----------------------------------------\n\n ");
-
+    
     printf("\n Menu des Activites\n");
     printf(" ------------------\n\n"); //On affiche le menu
-    printf("\n- 1.) Afficher le nombre d'entree par activite dans la journee\n");
-    printf("- 2.) Afficher toutes les activites\n");
-    printf("- 3.) Creer / modifier une activite\n");
-    printf("- 4.) Supprimer une activite\n\n\n");
+    printf("- 1.) Afficher toutes les activites\n");
+    printf("- 2.) Creer / modifier une activite\n");
+    printf("- 3.) Supprimer une activite\n\n\n");
 
     scanf("%d%*c",&choix);  //On récupère le choix de l'utilisateur à nouveau
     clean; // Commande pour vider le terminal sous windows 
@@ -197,19 +196,21 @@ void MenuActivite(int  Tab_numero_activite[], int Tab_tarif_activite[],int  Tab_
 
     switch (choix)
     {
-    case 1 : Affichage_entree(); // Affiche le nombre d'entrées par activités dans la journée 
+    case 1 : 
+    printf("====================================================================================\n");
+    printf("                           Affichage des activites \n");
+    printf("====================================================================================\n");
+
+
+ 
     break;
 
-    case 2 : Affichage_activite(); // Affiche toutes les activités
+    case 2 : ;
     break;
 
     case 3 : ; // Pour créer ou modifier une activité 
     break;
 
-    case 4 : Supprimer_activite(); // Pour supprimer une activité 
-    break;
-
-    case 5 : Gestion_activite( Tab_numero_activite, Tab_tarif_activite, Tab_nbr_entree_activite, Tab_numero_carte_adherent, Tab_Etat_carte, Tab_credit_carte, Tab_Presence_adherent, nbr_activite, nbAdherents );
     }
 }
 
@@ -221,26 +222,32 @@ void MenuGlobal(void)
 {
     int actif = 1, choix;
     int trash;
-    int tabNoCarte[100], tabEtatCarte[100], tabPoint[100];
+    int tabNoCarte[100] = {0}, tabEtatCarte[100] = {0}, tabPoint[100] = {0};
+
+    int Tab_nb_activite_adherent[100] = {0};
     int nbAdherents = chargement_tableaux_adherent(tabNoCarte, tabEtatCarte, tabPoint); // Chargement des adhérents
 
-    int tabNoAct[100], tabPrixAct[100];
-    int nbActivite = chargement_tableaux_activite(tabNoAct, tabPrixAct); // Chargement des activités
+
+    int Tab_nbr_entree_activite[100] ={0};
+    char Tab_nom_activite[100][20];
+    int tabNoAct[100] ={0}, tabPrixAct[100] ={0};
+    int nbActivite = chargement_tableaux_activite(tabNoAct, tabPrixAct, Tab_nom_activite); // Chargement des activités
     int tabEntree[100] = {0}, tabPresence[100] = {0};
+
 
 
     int taillePhysique = 100;
     
     // Gestion de problème de fichier
-    if (nbAdherents == -1 || nbActivite == -1)
+   /* if (nbAdherents == -1 || nbActivite == -1)
     {
         clean
         AfficheBandeauMP();
         printf("\nUne erreur est survenue : fichier introuvable.\nMerci de verifier la validite de votre fichier adherent.don et votre fichier activite.don dans le dossier donnees\n");
-    }
+    } 
 
     else
-    {
+    {*/
         while(actif)
         {
             clean
@@ -256,11 +263,16 @@ void MenuGlobal(void)
                     break;
                 case 1 : GestionAdherent(tabNoCarte, tabEtatCarte, tabPoint, &nbAdherents, taillePhysique); break;
                 case 2 : GestionCompteAdherent(tabNoCarte, tabEtatCarte, tabPoint, nbAdherents); break;
-                case 3 : MenuActivite(tabNoAct, tabPrixAct, tabEntree, tabNoCarte, tabEtatCarte, tabPoint, tabPresence, nbActivite, nbAdherents); break;
-                case 4 : Gestion_activite(tabNoAct, tabPrixAct, tabEntree, tabNoCarte, tabEtatCarte, tabPoint, tabPresence, nbActivite, nbAdherents); break;
+                case 3 : modif_crea_activite(tabNoAct, Tab_nom_activite, tabPrixAct, Tab_nbr_entree_activite, nbActivite); break;
+               
+                case 4 : Gestion_activite(tabNoAct, tabPrixAct, tabEntree, tabNoCarte, tabEtatCarte, tabPoint, tabPresence, nbActivite, nbAdherents, Tab_nom_activite, Tab_nb_activite_adherent); break;
             }
         }
-    }
+   // }
+
+
+   dechargement_adherent( tabNoCarte, tabEtatCarte, tabPoint);
+   dechargement_activite( tabNoAct, tabPrixAct, Tab_nom_activite);
 }
 
 /**

@@ -1,4 +1,4 @@
-#include "../header/adherent.h"
+    #include "../header/adherent.h"
 
 /**
  * @brief Affiche le message d'aide demandé
@@ -333,7 +333,7 @@ void RechargeCarte(int noCarte, int tabNoCarte[], int tabEtatCarte[], int tabPoi
             {
                 clean
                 printf("Numero carte d'adherent a recharger : ");
-                scanf(" %d", &noCarte);
+                scanf(" %d%*c", &noCarte);
 
                 indice = TrouverAdherent(tabNoCarte, nbAdherents, noCarte, &trouve);
             }
@@ -377,7 +377,7 @@ void RechargeCarte(int noCarte, int tabNoCarte[], int tabEtatCarte[], int tabPoi
                 {
                     clean
                     printf("Numero carte d'adherent a recharger : ");
-                    scanf(" %d", &noCarte);
+                    scanf(" %d%*c", &noCarte);
 
                     indice = TrouverAdherent(tabNoCarte, nbAdherents, noCarte, &trouve);
                 }
@@ -389,7 +389,7 @@ void RechargeCarte(int noCarte, int tabNoCarte[], int tabEtatCarte[], int tabPoi
                 // Récupération du nombre de crédit à ajouter
                 clean
                 printf("Combien souhaitez-vous ajouter de credit : ");
-                scanf(" %d", &credit);
+                scanf(" %d%*c", &credit);
 
                 // Vérification de l'état de la carte
 
@@ -399,7 +399,7 @@ void RechargeCarte(int noCarte, int tabNoCarte[], int tabEtatCarte[], int tabPoi
                     tabPointCarte[indice] += credit;
                     AfficheInfosAdherent(noCarte, tabNoCarte, tabEtatCarte, tabPointCarte, nbAdherents);
 
-                    Bonus(indice, tabPointCarte);
+                    Bonus(indice, tabPointCarte); 
                 
                     printf("\nTransaction de %d credits faite.\n", credit);
                     printf("Souhaitez-vous faire une nouvelle transaction de credit (O/N) : ");
@@ -417,7 +417,7 @@ void RechargeCarte(int noCarte, int tabNoCarte[], int tabEtatCarte[], int tabPoi
                     {
                         clean
                         printf("Numero carte d'adherent a recharger : ");
-                        scanf(" %d", &noCarte);
+                        scanf(" %d%*c", &noCarte);
 
                         indice = TrouverAdherent(tabNoCarte, nbAdherents, noCarte, &trouve);
                     }
