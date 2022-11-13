@@ -3,6 +3,8 @@
 #include "../header/adherent.h"
 #include "../header/menus.h"
 
+
+// Affiche un menu pour supprimer, créer, modifier et afficher les activités, et appelle ensuite les fonctions en question. 
 void modif_crea_activite(int Tab_numero_activite[], char  Tab_nom_activite[100][20], int Tab_tarif_activite[], int Tab_nbr_entree_activite[], int nbActivite)
 {
     clean;
@@ -10,7 +12,7 @@ void modif_crea_activite(int Tab_numero_activite[], char  Tab_nom_activite[100][
 
     printf("=================================================================================\n");
     printf("                       Gestion des activites\n");
-    printf("=================================================================================\n");
+    printf("=================================================================================\n\n\n");
 
     //affichage_activite( Tab_numero_activite,  Tab_tarif_activite, Tab_nom_activite, nbActivite,  Tab_nbr_entree_activite);
 
@@ -19,6 +21,15 @@ void modif_crea_activite(int Tab_numero_activite[], char  Tab_nom_activite[100][
     printf(" - 1.) Creer une activite.\n - 2.) Modifier une activite. \n - 3.) Supprimer une activite.\n - 4.) Afficher les Activites\n - 5) retour menu principal.\n\n");
     printf(" - Votre reponse : ");
     scanf("%d%*c", &choix);
+
+                while ( choix <= 0 || choix > 5)
+        {
+            printf("\n\n ---> Erreur de saisie !\n\n");
+            printf("   Saisir a nouveau : \n");
+            printf("   -----------------");
+            printf("\n\n   - ( O / N ) : ");
+            scanf("%d%*c", &choix);
+        }
 
     switch (choix)
     {
@@ -38,9 +49,10 @@ void modif_crea_activite(int Tab_numero_activite[], char  Tab_nom_activite[100][
          case 4 : 
          clean;    
              printf("=================================================================================\n");
-            printf("                       Affichage des activites\n");
+            printf("                       Affichage des activites \n");
             printf("=================================================================================\n\n\n");
             affichage_activite( Tab_numero_activite,  Tab_tarif_activite, Tab_nom_activite, nbActivite,  Tab_nbr_entree_activite);
+
             char trash;
             wait;
             break;
@@ -52,9 +64,11 @@ void modif_crea_activite(int Tab_numero_activite[], char  Tab_nom_activite[100][
 
 }
 
+
+//Permet de créer un activité 
 void creer_activite(int Tab_numero_activite[], char  Tab_nom_activite[100][20], int Tab_tarif_activite[], int Tab_nbr_entree_activite[], int nbActivite)
 {
-
+    
     printf("=================================================================================\n");
     printf("                            Creer une activite\n");
     printf("=================================================================================\n"); 
@@ -93,13 +107,21 @@ void creer_activite(int Tab_numero_activite[], char  Tab_nom_activite[100][20], 
                 else return;
             }
 
-            printf("\n\n Quel est le nom de l'activite ? : \n");
-            printf(    " -------------------------------\n\n - Votre reponse : ");
+            printf("\n\n Quel est le nom de l'activite ?  \n");
+            printf(    " ------------------------------\n\n - Votre reponse : ");
             scanf("%s", Tab_nom_activite[position]);
 
             nbActivite = nbActivite +1;
 
-            printf("\n\n - Quel est son numero  : ");
+
+            clean;
+            printf("=================================================================================\n");
+            printf("                            Creer une activite\n");
+            printf("=================================================================================\n\n"); 
+
+            printf("\n\n  Quel est son numero  ?\n");
+            printf(    "  ---------------------\n\n");
+            printf(" - Votre reponse : ");
 
             scanf("%d", &valeur_temp);
             Tab_numero_activite[position] = valeur_temp;
@@ -121,15 +143,27 @@ void creer_activite(int Tab_numero_activite[], char  Tab_nom_activite[100][20], 
                 }
             }      
 
+            clean;
+            printf("=================================================================================\n");
+            printf("                            Creer une activite\n");
+            printf("=================================================================================\n"); 
 
-            printf("\n\n - Quel est son Tarif : ");
+            printf("\n\n   Quel est son Tarif ? \n");
+            printf(    "   -------------------\n\n");
+            printf(" - Votre reponse : ");
     
             scanf("%d", &valeur_temp);
 
             Tab_tarif_activite[position] = valeur_temp;
 
-            printf(" \n\nL'activite %s a bien ete creee ! \n \n Son numero est le %d\n Son tarif est de %d\n\n",
-                     Tab_nom_activite[position], Tab_numero_activite[position], Tab_tarif_activite[position]);
+            clean;
+            printf("=================================================================================\n");
+            printf("                            Creer une activite\n");
+            printf("=================================================================================\n\n"); 
+
+            printf(" \n\n L'activite %s a bien ete creee ! \n",  Tab_nom_activite[position]);
+            printf(     "  ------------------------------\n\n");
+            printf(" -> Son numero est le %d\n -> Son tarif est de %d\n\n\n", Tab_numero_activite[position], Tab_tarif_activite[position]);
 
         affichage_activite( Tab_numero_activite,  Tab_tarif_activite, Tab_nom_activite, nbActivite,  Tab_nbr_entree_activite);
 
@@ -139,20 +173,26 @@ void creer_activite(int Tab_numero_activite[], char  Tab_nom_activite[100][20], 
 
 }
 
+
+//Permet de modifier les informations de l'activité 
 void modifier_activite(int Tab_numero_activite[], char  Tab_nom_activite[100][20], int Tab_tarif_activite[], int Tab_nbr_entree_activite[], int nbActivite)
 {
 
     printf("=================================================================================\n");
     printf("                            Modifier une activite\n");
-    printf("=================================================================================\n"); 
+    printf("=================================================================================\n\n\n"); 
     
     int i = 0, position = 0, valeur_temp =0, num = 0;
     char reponse;
 
     affichage_activite( Tab_numero_activite,  Tab_tarif_activite, Tab_nom_activite, nbActivite,  Tab_nbr_entree_activite);
 
-    printf("\n\n Quel est le numero de l'activite a modifier : ");
+    printf("\n\n Quel est le numero de l'activite a modifier ( tapez 0 pour annuler ) ? \n");
+    printf(    " ---------------------------------------------------------------------\n\n");
+    printf(" - Votre reponse : ");
     scanf("%d%*c", &num);
+
+    if (num == 0) return;
 
         for ( int i = 0; i < 100; i ++)
         {
@@ -181,8 +221,12 @@ void modifier_activite(int Tab_numero_activite[], char  Tab_nom_activite[100][20
 
                 if (reponse == 'O' || reponse == 'o') 
                 {
-                     printf(" \n\nQuelle activite souhaitez vous modifier  : ");
+                    printf("\n\n Quel est le numero de l'activite a modifier ( tapez 0 pour annuler ) ? \n");
+                    printf(    " ---------------------------------------------------------------------\n\n");
+                    printf(" - Votre reponse : ");
                     scanf("%d%*c", &num);
+
+                    if (num == 0) return;
 
                     for ( int i = 0; i < 100; i ++)
                     {
@@ -200,7 +244,8 @@ void modifier_activite(int Tab_numero_activite[], char  Tab_nom_activite[100][20
             }
 
 
-        printf(" \nSouhaitez vous  changer le nom ? \n\n");
+        printf(" \n Souhaitez vous  changer le nom ? \n");
+        printf(   " -------------------------------\n\n");
         printf(" - ( O /N ) : ");
         scanf("%c%*c",&reponse);
 
@@ -215,18 +260,19 @@ void modifier_activite(int Tab_numero_activite[], char  Tab_nom_activite[100][20
 
         if ( reponse == 'o' || reponse == 'O')
         {
-            printf("\n\n Quel est le nouveau nom de l'activite : ");
+            printf("\n\n Quel est le nouveau nom de l'activite ?\n ");
+            printf(    " --------------------------------------\n\n");
+            printf(" - Votre reponse : ");
             scanf("%s%*c", Tab_nom_activite[position]);
+        }
+        clean;
+        printf("=================================================================================\n");
+        printf("                            Modifier une activite\n");
+         printf("=================================================================================\n\n\n"); 
+        affichage_activite( Tab_numero_activite,  Tab_tarif_activite, Tab_nom_activite, nbActivite,  Tab_nbr_entree_activite);           
 
-                clean;
-            printf("=================================================================================\n");
-            printf("                            Modifier une activite\n");
-            printf("=================================================================================\n"); 
-
-            affichage_activite( Tab_numero_activite,  Tab_tarif_activite, Tab_nom_activite, nbActivite,  Tab_nbr_entree_activite);
-        }            
-
-        printf(" Souhaitez vous  changer le numero  ? \n\n");
+        printf(" \n\nSouhaitez vous  changer le numero  ? \n");
+        printf(" ----------------------------------\n\n");
         printf(" - ( O /N ) : ");
         scanf("%c%*c",&reponse);
 
@@ -241,35 +287,35 @@ void modifier_activite(int Tab_numero_activite[], char  Tab_nom_activite[100][20
 
         if ( reponse == 'o' || reponse == 'O')
         {
-            printf("\n\n Quel est le nouveau numero de l'activite : ");
+            printf("\n\n Quel est le nouveau numero de l'activite :\n ");
+            printf(    " -----------------------------------------\n\n");
+            printf("- Votre reponse : ");
             scanf("%d%*c", &valeur_temp);
             Tab_numero_activite[position] = valeur_temp;
 
            for (i = 0; i < 100; i ++)
             {
-
-                if (i == position) i = i +1;
-
-                while ( Tab_numero_activite[i] == Tab_numero_activite[position])
+                while ( (Tab_numero_activite[i] == Tab_numero_activite[position]) && i != position)
                 {   
-                    printf("\n\n Numero deja pris, reessayer : ");
+                    printf("\n\n ---> Numero deja pris, reessayer : ");
 
                  scanf("%d%c", &valeur_temp);
                  Tab_numero_activite[position] = valeur_temp;
 
-                 i = 0 ;
+                 i = 0;
 
                 }
             }
+        } 
 
-                clean;
-            printf("=================================================================================\n");
-            printf("                            Modifier une activite\n");
-            printf("=================================================================================\n"); 
-             affichage_activite( Tab_numero_activite,  Tab_tarif_activite, Tab_nom_activite, nbActivite,  Tab_nbr_entree_activite);
-        }            
+        clean;
+        printf("=================================================================================\n");
+        printf("                            Modifier une activite\n");
+        printf("=================================================================================\n\n\n"); 
+        affichage_activite( Tab_numero_activite,  Tab_tarif_activite, Tab_nom_activite, nbActivite,  Tab_nbr_entree_activite);           
 
-        printf(" Souhaitez vous  changer le Tarif  ? \n\n");
+        printf("\n\n Souhaitez vous  changer le Tarif  ? \n");
+        printf(" ----------------------------------\n\n");
         printf(" - ( O /N ) : ");
         scanf("%c%*c",&reponse);
 
@@ -284,21 +330,25 @@ void modifier_activite(int Tab_numero_activite[], char  Tab_nom_activite[100][20
 
         if ( reponse == 'o' || reponse == 'O')
         {
-            printf("\n\n Quel est le nouveau tarif de l'activite : ");
+            printf("\n\n Quel est le nouveau tarif de l'activite ?\n ");
+            printf(    " ----------------------------------------\n\n");
+            printf(" - Votre reponse : ");
 
-            printf("\n\n Quel est son Tarif : ");
             scanf("%d%*c", &valeur_temp);
 
             Tab_tarif_activite[position] = valeur_temp; 
-
-                clean;
-            printf("=================================================================================\n");
-            printf("                            Modifier une activite\n");
-            printf("=================================================================================\n");         
+         
         } 
 
-         printf(" L'activite %s a bien ete modifie ! \n \n Son numero est le %d\n Son tarif est de %d\n\n",
-                Tab_nom_activite[position], Tab_numero_activite[position], Tab_tarif_activite[position]);
+        clean;
+        printf("=================================================================================\n");
+        printf("                            Modifier une activite\n");
+        printf("=================================================================================\n\n\n");
+
+
+         printf("\n\n L'activite %s a bien ete modifie !\n", Tab_nom_activite[position]);
+         printf(    " ---------------------------------\n\n");
+         printf("\n \n -> Son numero est le %d\n -> Son tarif est de %d\n\n", Tab_numero_activite[position], Tab_tarif_activite[position]);
 
         affichage_activite( Tab_numero_activite,  Tab_tarif_activite, Tab_nom_activite, nbActivite,  Tab_nbr_entree_activite);
 
@@ -308,20 +358,25 @@ void modifier_activite(int Tab_numero_activite[], char  Tab_nom_activite[100][20
 
 }
 
+
+//Permet de supprimer une activité 
 void supprimer_activite(int Tab_numero_activite[], char  Tab_nom_activite[100][20], int Tab_tarif_activite[], int Tab_nbr_entree_activite[], int nbActivite)
 {
     clean;
     printf("=================================================================================\n");
     printf("                          Supprimer une activite\n");
-    printf("=================================================================================\n"); 
+    printf("=================================================================================\n\n\n"); 
 
     int i = 0, position = 0, valeur_temp =0, num  = 0;
     char reponse;
 
             affichage_activite( Tab_numero_activite,  Tab_tarif_activite, Tab_nom_activite, nbActivite,  Tab_nbr_entree_activite);
 
-            printf("\n\n Quel est le numero de l'activite a supprimer  : ");
+            printf("\n\n Quel est le numero de l'activite a supprimer ( tapez 0 pour annuler ) ? \n");
+            printf(    " ----------------------------------------------------------------------\n\n");
+            printf(" - Votre reponse : ");
             scanf("%d%*c", &num);
+            if ( num == 0) return;
 
         for ( int i = 0; i < 100; i ++)
         {
@@ -351,8 +406,12 @@ void supprimer_activite(int Tab_numero_activite[], char  Tab_nom_activite[100][2
 
                 if (reponse == 'O' || reponse == 'o') 
                 {
-                     printf(" \n\nQuelle activite souhaitez vous supprimer  ? : ");
+                     printf(" \n\nQuelle activite souhaitez vous supprimer ( tapez 0 pour annuler ) ?\n");
+                     printf(    " ----------------------------------------------------------------------\n\n");
+                    printf(" - Votre reponse : ");
                     scanf("%d%*c", &num);
+
+                    if ( num == 0) return;
 
                     for ( int i = 0; i < 100; i ++)
                     {
@@ -386,9 +445,12 @@ void supprimer_activite(int Tab_numero_activite[], char  Tab_nom_activite[100][2
 
 }
 
+
+//Permet d'afficher toutes les activités 
 void affichage_activite( int Tab_numero_activite[], int Tab_tarif_activite[], char Tab_nom_activite[100][20], int nbActivite, int Tab_nbr_entree_activite[])
 {
-    printf("   ====================================================================================================\n");
+
+   printf("   ====================================================================================================\n");
     printf("   | Nom de l'activite | Numero de l'activite | Tarif de l'activite | Nombre d'entree dans la journee |\n");
     printf("   |-------------------|----------------------|---------------------|---------------------------------|\n");
 
@@ -398,15 +460,16 @@ void affichage_activite( int Tab_numero_activite[], int Tab_tarif_activite[], ch
                                      Tab_nom_activite[i], Tab_numero_activite[i], Tab_tarif_activite[i], Tab_nbr_entree_activite[i]);
     }
     printf("   ====================================================================================================\n");
+
 }
 
+
+// Permet de lancer la consommation d'une activité, après avoir vérifié la validité du profil de l'adhérent. 
 void Gestion_activite(int  Tab_numero_activite[], int Tab_tarif_activite[],int  Tab_nbr_entree_activite[],int  Tab_numero_carte_adherent[], int  Tab_Etat_carte[], int  Tab_credit_carte[], int  Tab_Presence_adherent[], int nbr_activite, int nbAdherents,  char Tab_nom_activite[100][20],  int Tab_nb_activite_adherent[100])
 {
     char reponse ='g';
-    int verif_2 = 0;
-
     clean;
-    scanf("%*c");
+
 
     int num_adherant = 0, activite = 0, verif = 0, i = 1;
 
@@ -447,49 +510,32 @@ void Gestion_activite(int  Tab_numero_activite[], int Tab_tarif_activite[],int  
     printf("   - Votre reponse : ");
     scanf("%d", &num_adherant);
 
-    verif = verif_adherent(num_adherant,Tab_Presence_adherent, nbAdherents, Tab_numero_carte_adherent,  Tab_nb_activite_adherent);
+    verif = verif_adherent(num_adherant,Tab_Presence_adherent, nbAdherents, Tab_numero_carte_adherent,  Tab_nb_activite_adherent, Tab_Etat_carte);
+  
 
-if ( verif_2 == 4)
-{
-    printf(" ---> Adherent deja fait son nombre max d'activite ! \n\n");
-
-    return;
-    
-}
-
-    if (verif == 1) 
+    if ( verif == -1)
     {
-        printf("\n ---> Adherent deja venu au centre aujourd'hui ! \n");
-
+        char trash;
+        wait; 
         return;
     }
 
-        if (verif == 2) 
+    while (verif < 3 && verif >= 0)
     {
-        printf("\n ---> Adherent non existant ! \n");
-
-        return;
+        verif = verif + effectuer_activite( num_adherant, Tab_numero_activite,  Tab_tarif_activite,  Tab_nbr_entree_activite,  Tab_numero_carte_adherent, Tab_Etat_carte,  Tab_credit_carte,   Tab_Presence_adherent, nbr_activite,  nbAdherents,  Tab_nom_activite, Tab_nb_activite_adherent);
     }
 
-    if (verif == 3) {
-
-    return;
-    }
-
-    while (verif != 1  || verif != 3 || verif_2 != 4 )
+    if (verif >= 3) 
     {
-        if (verif ==2 ) return;
-        verif_2 = verif_adherent(num_adherant,Tab_Presence_adherent, nbAdherents, Tab_numero_carte_adherent,  Tab_nb_activite_adherent);
-
-
-        verif = effectuer_activite( num_adherant, Tab_numero_activite,  Tab_tarif_activite,  Tab_nbr_entree_activite,  Tab_numero_carte_adherent, Tab_Etat_carte,  Tab_credit_carte,   Tab_Presence_adherent, nbr_activite,  nbAdherents,  Tab_nom_activite, Tab_nb_activite_adherent);
+        printf("\n\n ---> L'adherent a fait ses 3 activites maximum dans la journee. Il doit attendre demain pour recommencer\n\n");
+        char trash;
+        wait;
     }
-    
-    if (verif >3 ) printf("\n ---> vous avez déjà fait 3 activités dans la journée !\n      Revenez demain !\n\n");
 
-    
 }
 
+
+//Permet de faire une activité et de vérifier la validité de l'activité choisie. 
 int effectuer_activite(int num_adherant, int  Tab_numero_activite[], int Tab_tarif_activite[],int  Tab_nbr_entree_activite[],int  Tab_numero_carte_adherent[], int  Tab_Etat_carte[], int  Tab_credit_carte[], int  Tab_Presence_adherent[], int nbr_activite, int nbAdherents,  char Tab_nom_activite[100][20],  int Tab_nb_activite_adherent[100])
 {
     
@@ -504,13 +550,18 @@ int effectuer_activite(int num_adherant, int  Tab_numero_activite[], int Tab_tar
     printf(    "   -----------------------------\n\n\n");
    
     affichage_activite( Tab_numero_activite, Tab_tarif_activite, Tab_nom_activite, nbr_activite, Tab_nbr_entree_activite);
+    position_adherent = TrouverAdherent(Tab_numero_carte_adherent, nbAdherents, num_adherant, &verif);
 
+    printf(    " ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+    printf(  "\n | ->  Adherent numero : %7d |\n", num_adherant);
+    printf(    " | ->  Credit restant  : %7d |\n", Tab_credit_carte[position_adherent]);
+    printf(    " ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
     printf("\n\n   Choississez le numero de l'activite souhaitee : \n");
     printf(    "   ----------------------------------------------\n");
     printf("   - Votre reponse : ");
     scanf("%d%*c", &activite);
 
-    position_adherent = TrouverAdherent(Tab_numero_carte_adherent, nbAdherents, num_adherant, &verif);
+  
 
     verif = verif_activite(Tab_numero_activite, activite, nbr_activite);
 
@@ -531,23 +582,22 @@ int effectuer_activite(int num_adherant, int  Tab_numero_activite[], int Tab_tar
             scanf("%c%*c", &reponse);
         }
 
-        if ( reponse == 'n' || reponse == 'N') return 1;
+        if ( reponse == 'n' || reponse == 'N') return -6;
         else
         {
-            clean;
+        clean;
         printf("================================================================\n");
         printf("                  Effectuer une Activite\n");
         printf("================================================================\n\n\n");
 
      printf("\n\n\n - Les activite disponibles  :  \n");
     printf(    "   -----------------------------\n\n\n");
-   
-    affichage_activite( Tab_numero_activite, Tab_tarif_activite, Tab_nom_activite, nbr_activite, Tab_nbr_entree_activite);
 
-          printf("\n\n - Quelle activite l'adherent souhaite t'il faire :  \n");
-        printf(    "   -----------------------------------------------\n");
-    
         affichage_activite( Tab_numero_activite, Tab_tarif_activite, Tab_nom_activite, nbr_activite, Tab_nbr_entree_activite);
+        printf(    " ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+        printf(  "\n | ->  Adherent numero : %7d |\n", num_adherant);
+        printf(    " | ->  Credit restant  : %7d |\n", Tab_credit_carte[position_adherent]);
+        printf(    " ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
 
         printf("\n\n   Choississez le numero de l'activite souhaitee : \n");
         printf(    "   ----------------------------------------------\n");
@@ -560,7 +610,7 @@ int effectuer_activite(int num_adherant, int  Tab_numero_activite[], int Tab_tar
 
     position_activite = verif;
 
-    verif = Tab_credit_carte[position_adherent] - Tab_tarif_activite[position_activite-1];  
+    verif = Tab_credit_carte[position_adherent] - Tab_tarif_activite[position_activite];  
    
    while (verif < 0)
    {
@@ -585,15 +635,15 @@ int effectuer_activite(int num_adherant, int  Tab_numero_activite[], int Tab_tar
 
 
 
-       verif = Tab_credit_carte[position_adherent] - Tab_tarif_activite[position_activite-1];  
+        verif = Tab_credit_carte[position_adherent] - Tab_tarif_activite[position_activite];  
    }
 
    Tab_credit_carte[position_adherent] = verif;
 
-   printf("\n L'activite %s a bien ete realise !\n l'adherent numero %d possede encore %d credit. \n", Tab_nom_activite[position_activite-1], Tab_numero_carte_adherent[position_adherent], Tab_credit_carte[position_adherent]);
+   printf("\n L'activite %s a bien ete realise !\n l'adherent numero %d possede encore %d credit. \n", Tab_nom_activite[position_activite], Tab_numero_carte_adherent[position_adherent], Tab_credit_carte[position_adherent]);
+    Tab_Presence_adherent[position_adherent] = 1;
 
-Tab_nb_activite_adherent[position_adherent]= Tab_nb_activite_adherent[position_adherent] +1;
-Tab_nbr_entree_activite[position_activite] = Tab_nbr_entree_activite[position_activite] +1 ;
+    Tab_nbr_entree_activite[position_activite] = Tab_nbr_entree_activite[position_activite] +1 ;
 
    printf("\n   Souhaitez-vous faire une activite a nouveau ? \n");
     printf( "   -------------------------------------------\n");
@@ -609,41 +659,52 @@ Tab_nbr_entree_activite[position_activite] = Tab_nbr_entree_activite[position_ac
         scanf("%c%*c", &reponse);
     }
 
-   if (reponse == 'O' || reponse =='o') return 0;
-   if (reponse == 'N' || reponse == 'n' ) return 2;
+   if (reponse == 'O' || reponse =='o') return 1;
+   if (reponse == 'N' || reponse == 'n' ) return -10;
 
 }
 
-
-int verif_adherent(int num_adherant, int Tab_Presence_adherent[], int nbAdherents, int Tab_numero_carte_adherent[],  int Tab_nb_activite_adherent[100])
+//Permet de vérifier l'existence de l'adherent, le fait qu'il ne soit pas encore venu et la validité de sa carte. 
+int verif_adherent(int num_adherant, int Tab_Presence_adherent[], int nbAdherents, int Tab_numero_carte_adherent[],  int Tab_nb_activite_adherent[100], int Tab_Etat_carte[])
 {
-    int i = 0, verif = 6 , position = 0;
+
+    int i = 0, verif = 0 , position = 0;
 
     position = TrouverAdherent(Tab_numero_carte_adherent, nbAdherents, num_adherant, &verif);
 
-
-    if (verif != 1) return 2;
+    if ( position == -1 )
+    {
+    printf("\n\n ---> Adherent non existant \n\n");
+    return -1;
+    }
 
     for (i = 0; i <100; i ++)
     {
-        if (Tab_Presence_adherent[i] == num_adherant) return 1;
+        if (Tab_Presence_adherent[position] == 1)
+       {
+        printf("\n\n ---> Adherent deja venu aujourd'hui !\n\n");
+        return -1;
+       }
     } 
 
+    if ( Tab_Etat_carte[position] != 1)
+    {
+        printf("\n\n ---> La carte de l'adherent est desactive pour la raison suivante : ");
+        etat_desac(1, Tab_Etat_carte[position]);
+        printf("\n ---> Veuillez reactiver sa carte pour effectuer des activites....\n\n");
+        return -1;
+    }
 
-    if ( Tab_nb_activite_adherent[position] >= 3) return 4;
-
-
- 
     return 0;
 }
 
 
-
+// Permet de voir si l'activité existe bien. 
 int verif_activite(int Tab_numero_activite[],int  activite, int nbActivite)
 {
     for (int i = 0; i <nbActivite; i ++ )
     {
-        if (Tab_numero_activite[i] == activite) return i+1;
+        if (Tab_numero_activite[i] == activite) return i;
     }
 
     return -1;

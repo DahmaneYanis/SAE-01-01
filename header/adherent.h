@@ -16,3 +16,7 @@ void RechargeCarte(int noCarte, int tabNoCarte[], int tabEtatCarte[], int tabPoi
 void CreerAdherent(int tabNoCarte[], int tabEtatCarte[], int tabPointCarte[], int *nbAdherents, int taillePhysique);
 
 void Bonus(int indice, int tabPointCarte[]);
+
+void etat_desac(int mode, int raison);
+
+void Gestion_carte( int Tab_numero_carte_adherent[], int Tab_Etat_carte[], int cible, int nbAdherents);

@@ -171,7 +171,9 @@ void AfficheAdherents(int tabNoCarte[], int tabEtatCarte[], int tabPointCarte[],
         for (int i = min; i < max; i++)
         {
             ligne();    
-            printf("\t| %15d | %16d | %18d |\n", tabNoCarte[i], tabEtatCarte[i], tabPointCarte[i]);
+                   printf("\t| %15d |     ",tabNoCarte[i]);
+        etat_desac(2, tabEtatCarte[i]);
+        printf("    | %18d |\n",tabPointCarte[i]);
 
         }
 
@@ -254,7 +256,9 @@ int AfficheInfosAdherent(int noCarte, int tabNoCarte[], int tabEtatCarte[], int 
         printf("Information de l'adherent %d : \n", noCarte);
         printf("\n\t| NUMERO ADHERENT | ETAT DE LA CARTE | CREDIT DE LA CARTE |\n");
         ligne();
-        printf("\t| %15d | %16d | %18d |\n", tabNoCarte[indice], tabEtatCarte[indice], tabPointCarte[indice]);
+        printf("\t| %15d |     ",tabNoCarte[indice]);
+        etat_desac(2, tabEtatCarte[indice]);
+        printf("    | %18d |\n",tabPointCarte[indice]);
         
         return 0;
     }
@@ -693,3 +697,124 @@ void CreerAdherent(int tabNoCarte[], int tabEtatCarte[], int tabPointCarte[], in
             dispo = 0;
     }
 }
+
+// Permet d'activer et de désactiver la carte en précisant la raison de la désactivation 
+void Gestion_carte( int Tab_numero_carte_adherent[], int Tab_Etat_carte[], int cible, int nbAdherents)
+{
+    int choix = 0, position =TrouverAdherent(Tab_numero_carte_adherent,  nbAdherents, cible, &choix);
+    char reponse;
+    
+    choix = Tab_Etat_carte[position];
+    clean;
+    printf("=====================================================================\n");
+    printf("       Activation / Desactivation Carte Adherent\n");
+    printf("=====================================================================\n\n");
+
+    printf(" La carte est actuellement :");
+
+    if ( choix == 1 ) printf(" active\n");
+    else printf(" desactive\n");
+    printf(" -------------------------\n");
+
+    if (choix != 1)
+    {
+        printf(" - Raison de la desactivation : "); etat_desac(1,choix);
+        printf("\n\n Souhaitez-vous la reactiver ? \n");
+        printf(" ----------------------------\n\n");
+        printf(" - ( O / N ) : ");
+        scanf("%c%*c", &reponse);
+
+        while ( reponse != 'O' && reponse !='o' && reponse !='n' && reponse != 'N')
+             {
+                printf("\n\n ---> Erreur de saisie !\n\n");
+                 printf("   Saisir a nouveau : \n");
+                printf("   -----------------");
+                printf("\n\n   - ( O / N ) : ");
+                scanf("%c%*c", &reponse);
+            }
+
+            if (reponse == 'o' || reponse == 'O')
+            {
+                choix = 1;
+                printf("\n\n ---> La carte a bien ete reactive ! \n\n");
+                
+                Tab_Etat_carte[position] = 1;
+
+                char trash;
+                wait;
+                return;
+            }
+    }
+
+    if (choix == 1)
+    {
+        printf("\n\n Souhaitez vous desactiver la carte ?\n");
+        printf(    " -----------------------------------\n");
+        printf(" - ( O / N ) : ");
+
+        scanf("%c%*c", &reponse);
+
+        while ( reponse != 'O' && reponse !='o' && reponse !='n' && reponse != 'N')
+             {
+                printf("\n\n ---> Erreur de saisie !\n\n");
+                 printf("   Saisir a nouveau : \n");
+                printf("   -----------------");
+                printf("\n\n   - ( O / N ) : ");
+                scanf("%c%*c", &reponse);
+            }
+    
+    if ( reponse == 'o' || reponse =='O')
+    {
+        clean;
+        printf("=====================================================================\n");
+        printf("       Activation / Desactivation Carte Adherent\n");
+        printf("=====================================================================\n\n");
+        printf("\n Raison de la desactivation :\n");
+        printf(" ---------------------------\n\n");
+        printf(" - 1.) Mauvais comportement\n - 2.) Abonnement impaye\n - 3.) Manque certificat medical\n - 4.) Autre raison...\n\n");
+        printf(" - votre reponse : ");
+        scanf("%d%*c", &choix); 
+
+            while ( choix <= 0 || choix > 4)
+             {
+                printf("\n\n ---> Erreur de saisie !\n\n");
+                 printf("   Saisir a nouveau : \n");
+                printf("   -----------------");
+                printf("\n\n   - ( O / N ) : ");
+                scanf("%c%*c", &choix);
+            }
+            
+
+            Tab_Etat_carte[position] = choix;
+    }
+    else return;
+
+    printf("\n ---> La carte a bien ete desactive !\n ");
+    char trash;
+    wait;
+    }
+
+}
+
+
+// Permet d'afficher la raison de la désactivation de la carte en mode 1
+//Permet d'afficher l'etat ( active / desactive ) de la carte en mode 2 
+void etat_desac(int mode, int raison)
+{
+
+    if (mode == 1)
+    switch(raison - 1 )
+    {
+        case 1 : printf("Mauvais comportement"); break;
+        case 2 : printf("Abonnement impaye"); break;
+        case 3: printf("Manque certificat medical"); break;
+        case 4: printf("Raison inconnue..."); break;
+    }
+
+    if (mode == 2)
+    {
+        if (raison == 1) printf("Active   ");
+        else printf(            "Desactive");
+    }
+}
+
