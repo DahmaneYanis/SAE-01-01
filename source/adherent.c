@@ -245,10 +245,8 @@ int AfficheInfosAdherent(int noCarte, int tabNoCarte[], int tabEtatCarte[], int 
     clean
 
     // Traitement du résultat de la recherche
-    if (!trouve && indice != -1)
+    if (!trouve && indice == -1)
     {
-        printf("Adherent %d introuvable.\n", noCarte);
-
         return -1;
     }
     else
@@ -575,7 +573,7 @@ void Bonus(int indice, int tabPointCarte[])
 {
     int rep, trash, actif = 1, valable;
     clean
-    printf("Le client fait-il parti d'une des catégories sociales suivantes (O/N) :\n");
+    printf("Le client fait-il parti d'une des categories sociales suivantes (O/N) :\n");
     printf("\t- Handicape\n");
     printf("\t- Retraite\n");
     printf("\t- Etudiant\n");

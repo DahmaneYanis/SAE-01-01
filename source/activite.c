@@ -3,8 +3,15 @@
 #include "../header/adherent.h"
 #include "../header/menus.h"
 
-
-// Affiche un menu pour supprimer, créer, modifier et afficher les activités, et appelle ensuite les fonctions en question. 
+/**
+ * @brief  Affiche un menu pour supprimer, créer, modifier et afficher les activités, et appelle ensuite les fonctions en question. 
+ * 
+ * @param Tab_numero_activite [TABLEAU] Liste des numéros d'activités 
+ * @param Tab_nom_activite [TABLEAU] Liste du nouveau des activités 
+ * @param Tab_tarif_activite [TABLEAU] Liste des tarifs des activités 
+ * @param nbActivite  [ Taille Logique] Nombre d'activités total
+ * @param Tab_nbr_entree_activite [TABLEAU] Liste du nombre d'entrée par activité dans la journée.
+ */
 void modif_crea_activite(int Tab_numero_activite[], char  Tab_nom_activite[100][20], int Tab_tarif_activite[], int Tab_nbr_entree_activite[], int nbActivite)
 {
     clean;
@@ -64,7 +71,15 @@ void modif_crea_activite(int Tab_numero_activite[], char  Tab_nom_activite[100][
 }
 
 
-//Permet de créer un activité 
+/**
+ * @brief  Permet de créer  une activité 
+ * 
+ * @param Tab_numero_activite [TABLEAU] Liste des numéros d'activités 
+ * @param Tab_nom_activite [TABLEAU] Liste du nouveau des activités 
+ * @param Tab_tarif_activite [TABLEAU] Liste des tarifs des activités 
+ * @param nbActivite  [ Taille Logique] Nombre d'activités total
+ * @param Tab_nbr_entree_activite [TABLEAU] Liste du nombre d'entrée par activité dans la journée.
+ */
 void creer_activite(int Tab_numero_activite[], char  Tab_nom_activite[100][20], int Tab_tarif_activite[], int Tab_nbr_entree_activite[], int nbActivite)
 {
     
@@ -173,7 +188,15 @@ void creer_activite(int Tab_numero_activite[], char  Tab_nom_activite[100][20], 
 }
 
 
-//Permet de modifier les informations de l'activité 
+/**
+ * @brief  Permet de modifier une activité  
+ * 
+ * @param Tab_numero_activite [TABLEAU] Liste des numéros d'activités 
+ * @param Tab_nom_activite [TABLEAU] Liste du nouveau des activités 
+ * @param Tab_tarif_activite [TABLEAU] Liste des tarifs des activités 
+ * @param nbActivite  [ Taille Logique] Nombre d'activités total
+ * @param Tab_nbr_entree_activite [TABLEAU] Liste du nombre d'entrée par activité dans la journée.
+ */
 void modifier_activite(int Tab_numero_activite[], char  Tab_nom_activite[100][20], int Tab_tarif_activite[], int Tab_nbr_entree_activite[], int nbActivite)
 {
 
@@ -358,7 +381,15 @@ void modifier_activite(int Tab_numero_activite[], char  Tab_nom_activite[100][20
 }
 
 
-//Permet de supprimer une activité 
+/**
+ * @brief  Permet de supprimer une activité 
+ * 
+ * @param Tab_numero_activite [TABLEAU] Liste des numéros d'activités 
+ * @param Tab_nom_activite [TABLEAU] Liste du nouveau des activités 
+ * @param Tab_tarif_activite [TABLEAU] Liste des tarifs des activités 
+ * @param nbActivite  [ Taille Logique] Nombre d'activités total
+ * @param Tab_nbr_entree_activite [TABLEAU] Liste du nombre d'entrée par activité dans la journée.
+ */
 void supprimer_activite(int Tab_numero_activite[], char  Tab_nom_activite[100][20], int Tab_tarif_activite[], int Tab_nbr_entree_activite[], int nbActivite)
 {
     clean;
@@ -445,7 +476,15 @@ void supprimer_activite(int Tab_numero_activite[], char  Tab_nom_activite[100][2
 }
 
 
-//Permet d'afficher toutes les activités 
+/**
+ * @brief  Permet de d'afficher une activité 
+ * 
+ * @param Tab_numero_activite [TABLEAU] Liste des numéros d'activités 
+ * @param Tab_nom_activite [TABLEAU] Liste du nouveau des activités 
+ * @param Tab_tarif_activite [TABLEAU] Liste des tarifs des activités 
+ * @param nbActivite  [ Taille Logique] Nombre d'activités total
+ * @param Tab_nbr_entree_activite [TABLEAU] Liste du nombre d'entrée par activité dans la journée.
+ */
 void affichage_activite( int Tab_numero_activite[], int Tab_tarif_activite[], char Tab_nom_activite[100][20], int nbActivite, int Tab_nbr_entree_activite[])
 {
 
@@ -463,7 +502,21 @@ void affichage_activite( int Tab_numero_activite[], int Tab_tarif_activite[], ch
 }
 
 
-// Permet de lancer la consommation d'une activité, après avoir vérifié la validité du profil de l'adhérent. 
+/**
+ * @brief Permet de lancer la consommation d'une activité, après avoir vérifié la validité du profil de l'adhérent. 
+ * 
+ * @param Tab_numero_activite [TABLEAU] Liste des numéros d'activités 
+ * @param Tab_nom_activite [TABLEAU] Liste du nouveau des activités 
+ * @param Tab_tarif_activite [TABLEAU] Liste des tarifs des activités 
+ * @param Tab_nbr_entree_activite [TABLEAU] Liste du nombre d'entrée par activité dans la journée.
+ * @param Tab_numero_carte_adherent[ TABLEAU ] Liste de tous les numéros des cartes des adhérents 
+ * @param Tab_Etat_carte[TABLEAU ] Liste des tous les etats des cartes adhérents
+ * @param Tab_credit_carte[ TABLEAU ] Liste de tous les crédits de chaque adhérents 
+ * @param Tab_Presence_adherent[TABLEAU ] Liste de la présence ou non dans adhérents dans le centre pour la journée 
+ * @param nbr_activite [ TAILLE LOGIQUE ] Nombre d'activités total
+ * @param  nbAdherents [ TAILLE LOGIQUE  ] Nombre d'adhérents total
+ * @param Tab_nb_activite_adherent[ TABLEAU ] Liste du nombre d'activités réalisées par un ahdérent dans la journée. 
+ */
 void Gestion_activite(int  Tab_numero_activite[], int Tab_tarif_activite[],int  Tab_nbr_entree_activite[],int  Tab_numero_carte_adherent[], int  Tab_Etat_carte[], int  Tab_credit_carte[], int  Tab_Presence_adherent[], int nbr_activite, int nbAdherents,  char Tab_nom_activite[100][20],  int Tab_nb_activite_adherent[100])
 {
     char reponse ='g';
@@ -534,7 +587,22 @@ void Gestion_activite(int  Tab_numero_activite[], int Tab_tarif_activite[],int  
 }
 
 
-//Permet de faire une activité et de vérifier la validité de l'activité choisie. 
+/**
+ * @brief Permet de faire une activité et de vérifier la validité de l'activité choisie. 
+ * 
+ * @param num_adherant [ VARIABLE ] Numéro de l'adherent effectuant l'acitivité 
+ * @param Tab_numero_activite [TABLEAU] Liste des numéros d'activités 
+ * @param Tab_nom_activite [TABLEAU] Liste du nouveau des activités 
+ * @param Tab_tarif_activite [TABLEAU] Liste des tarifs des activités 
+ * @param Tab_nbr_entree_activite [TABLEAU] Liste du nombre d'entrée par activité dans la journée.
+ * @param Tab_numero_carte_adherent[ TABLEAU ] Liste de tous les numéros des cartes des adhérents 
+ * @param Tab_Etat_carte[TABLEAU ] Liste des tous les etats des cartes adhérents
+ * @param Tab_credit_carte[ TABLEAU ] Liste de tous les crédits de chaque adhérents 
+ * @param Tab_Presence_adherent[TABLEAU ] Liste de la présence ou non dans adhérents dans le centre pour la journée 
+ * @param nbr_activite [ TAILLE LOGIQUE ] Nombre d'activités total
+ * @param  nbAdherents [ TAILLE LOGIQUE  ] Nombre d'adhérents total
+ * @param Tab_nb_activite_adherent[ TABLEAU ] Liste du nombre d'activités réalisées par un ahdérent dans la journée. 
+ */ 
 int effectuer_activite(int num_adherant, int  Tab_numero_activite[], int Tab_tarif_activite[],int  Tab_nbr_entree_activite[],int  Tab_numero_carte_adherent[], int  Tab_Etat_carte[], int  Tab_credit_carte[], int  Tab_Presence_adherent[], int nbr_activite, int nbAdherents,  char Tab_nom_activite[100][20],  int Tab_nb_activite_adherent[100])
 {
     
@@ -663,7 +731,15 @@ int effectuer_activite(int num_adherant, int  Tab_numero_activite[], int Tab_tar
 
 }
 
-//Permet de vérifier l'existence de l'adherent, le fait qu'il ne soit pas encore venu et la validité de sa carte. 
+/**
+ * @brief Permet de vérifier l'existence de l'adherent, le fait qu'il ne soit pas encore venu et la validité de sa carte.
+ * 
+ * @param Tab_numero_carte_adherent[ TABLEAU ] Liste de tous les numéros des cartes des adhérents 
+ * @param Tab_Etat_carte[TABLEAU ] Liste des tous les etats des cartes adhérents
+ * @param Tab_Presence_adherent[TABLEAU ] Liste de la présence ou non dans adhérents dans le centre pour la journée 
+ * @param  nbAdherents [ TAILLE LOGIQUE  ] Nombre d'adhérents total
+ * @param Tab_nb_activite_adherent[ TABLEAU ] Liste du nombre d'activités réalisées par un ahdérent dans la journée. 
+ */
 int verif_adherent(int num_adherant, int Tab_Presence_adherent[], int nbAdherents, int Tab_numero_carte_adherent[],  int Tab_nb_activite_adherent[100], int Tab_Etat_carte[])
 {
 
@@ -698,7 +774,14 @@ int verif_adherent(int num_adherant, int Tab_Presence_adherent[], int nbAdherent
 }
 
 
-// Permet de voir si l'activité existe bien. 
+/**
+ * @brief Permet de voir si l'activité existe bien.
+ * 
+ * @param Tab_numero_activite [TABLEAU] Liste des numéros d'activités 
+ * @param nbActivite [ TAILLE LOGIQUE ] Nombre d'activités total
+ * @param  activite [ Variable ] numero de l'activité étudiée
+ * @param Tab_nb_activite_adherent[ TABLEAU ] Liste du nombre d'activités réalisées par un ahdérent dans la journée. 
+ */ 
 int verif_activite(int Tab_numero_activite[],int  activite, int nbActivite)
 {
     for (int i = 0; i <nbActivite; i ++ )
