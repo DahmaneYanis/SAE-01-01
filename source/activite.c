@@ -16,39 +16,40 @@ void modif_crea_activite(int Tab_numero_activite[], char  Tab_nom_activite[100][
 
     //affichage_activite( Tab_numero_activite,  Tab_tarif_activite, Tab_nom_activite, nbActivite,  Tab_nbr_entree_activite);
 
-    printf("   Souhaitez vous : \n");
+    printf("   Choix disponibles : \n");
     printf("   ---------------\n\n");
-    printf(" - 1.) Creer une activite.\n - 2.) Modifier une activite. \n - 3.) Supprimer une activite.\n - 4.) Afficher les Activites\n - 5) retour menu principal.\n\n");
-    printf(" - Votre reponse : ");
+    printf(" - 0. Retour au menu principal.\n - 1. Creer une activite.\n - 2. Modifier une activite. \n - 3. Supprimer une activite.\n - 4. Afficher les Activites\n\n");
+    printf("Votre reponse : ");
     scanf("%d%*c", &choix);
 
-                while ( choix <= 0 || choix > 5)
-        {
-            printf("\n\n ---> Erreur de saisie !\n\n");
-            printf("   Saisir a nouveau : \n");
-            printf("   -----------------");
-            printf("\n\n   - ( O / N ) : ");
-            scanf("%d%*c", &choix);
-        }
+    while ( choix < 0 || choix > 4)
+    {
+        printf("\n\n ---> Erreur de saisie !\n\n");
+        printf("   Saisir a nouveau : \n");
+        printf("   -----------------");
+        printf("\n\n   - ( O / N ) : ");
+        scanf("%d%*c", &choix);
+    }
 
     switch (choix)
     {
-        case 1 :clean;
+        case 1 :
+            clean;
             creer_activite(Tab_numero_activite,  Tab_nom_activite, Tab_tarif_activite, Tab_nbr_entree_activite, nbActivite);
-         break;
+            break;
 
         case 3 :         
-        supprimer_activite(Tab_numero_activite,  Tab_nom_activite, Tab_tarif_activite, Tab_nbr_entree_activite, nbActivite);
-         break;
+            supprimer_activite(Tab_numero_activite,  Tab_nom_activite, Tab_tarif_activite, Tab_nbr_entree_activite, nbActivite);
+            break;
 
          case 2 : 
-         clean;
-         modifier_activite(Tab_numero_activite,  Tab_nom_activite, Tab_tarif_activite, Tab_nbr_entree_activite, nbActivite);
-         break;
+            clean;
+            modifier_activite(Tab_numero_activite,  Tab_nom_activite, Tab_tarif_activite, Tab_nbr_entree_activite, nbActivite);
+            break;
 
          case 4 : 
-         clean;    
-             printf("=================================================================================\n");
+            clean;    
+            printf("=================================================================================\n");
             printf("                       Affichage des activites \n");
             printf("=================================================================================\n\n\n");
             affichage_activite( Tab_numero_activite,  Tab_tarif_activite, Tab_nom_activite, nbActivite,  Tab_nbr_entree_activite);
@@ -57,9 +58,7 @@ void modif_crea_activite(int Tab_numero_activite[], char  Tab_nom_activite[100][
             wait;
             break;
 
-        case 5 : return;
-
-        
+        case 0 : return;
     }
 
 }

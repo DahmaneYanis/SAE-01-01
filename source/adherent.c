@@ -171,9 +171,9 @@ void AfficheAdherents(int tabNoCarte[], int tabEtatCarte[], int tabPointCarte[],
         for (int i = min; i < max; i++)
         {
             ligne();    
-                   printf("\t| %15d |     ",tabNoCarte[i]);
-        etat_desac(2, tabEtatCarte[i]);
-        printf("    | %18d |\n",tabPointCarte[i]);
+            printf("\t| %15d |     ",tabNoCarte[i]);
+            etat_desac(2, tabEtatCarte[i]);
+            printf("    | %18d |\n",tabPointCarte[i]);
 
         }
 
@@ -682,7 +682,7 @@ void CreerAdherent(int tabNoCarte[], int tabEtatCarte[], int tabPointCarte[], in
         _rep_
 
         // Verification de la validité de la réponse
-        while (rep != 'N' && rep != 'O')
+        while (rep != 'N' && rep != 'O' && rep!= 'n' && rep!= 'o')
         {
             clean
             printf("Reponse incorrecte. Souhaitez vous creer un autre adherent (O/N) : ");
@@ -698,10 +698,10 @@ void CreerAdherent(int tabNoCarte[], int tabEtatCarte[], int tabPointCarte[], in
     }
 }
 
-// Permet d'activer et de désactiver la carte en précisant la raison de la désactivation 
+//Permet d'activer et de désactiver la carte en précisant la raison de la désactivation 
 void Gestion_carte( int Tab_numero_carte_adherent[], int Tab_Etat_carte[], int cible, int nbAdherents)
 {
-    int choix = 0, position =TrouverAdherent(Tab_numero_carte_adherent,  nbAdherents, cible, &choix);
+    int choix = 0, position = TrouverAdherent(Tab_numero_carte_adherent,  nbAdherents, cible, &choix);
     char reponse;
     
     choix = Tab_Etat_carte[position];
@@ -718,7 +718,8 @@ void Gestion_carte( int Tab_numero_carte_adherent[], int Tab_Etat_carte[], int c
 
     if (choix != 1)
     {
-        printf(" - Raison de la desactivation : "); etat_desac(1,choix);
+        printf(" - Raison de la desactivation : "); 
+        etat_desac(1,choix);
         printf("\n\n Souhaitez-vous la reactiver ? \n");
         printf(" ----------------------------\n\n");
         printf(" - ( O / N ) : ");
@@ -785,7 +786,7 @@ void Gestion_carte( int Tab_numero_carte_adherent[], int Tab_Etat_carte[], int c
             }
             
 
-            Tab_Etat_carte[position] = choix;
+            Tab_Etat_carte[position] = choix+1;
     }
     else return;
 
@@ -797,11 +798,11 @@ void Gestion_carte( int Tab_numero_carte_adherent[], int Tab_Etat_carte[], int c
 }
 
 
-// Permet d'afficher la raison de la désactivation de la carte en mode 1
+//Permet d'afficher la raison de la désactivation de la carte en mode 1
 //Permet d'afficher l'etat ( active / desactive ) de la carte en mode 2 
 void etat_desac(int mode, int raison)
 {
-
+    // Mode 1
     if (mode == 1)
     switch(raison - 1 )
     {
@@ -811,6 +812,7 @@ void etat_desac(int mode, int raison)
         case 4: printf("Raison inconnue..."); break;
     }
 
+    // Mode 2
     if (mode == 2)
     {
         if (raison == 1) printf("Active   ");
