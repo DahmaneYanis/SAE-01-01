@@ -14,7 +14,7 @@
  */
 void modif_crea_activite(int Tab_numero_activite[], char  Tab_nom_activite[100][20], int Tab_tarif_activite[], int Tab_nbr_entree_activite[], int nbActivite)
 {
-    clean;
+    clean
     int choix = 0;
 
     printf("=================================================================================\n");
@@ -41,7 +41,7 @@ void modif_crea_activite(int Tab_numero_activite[], char  Tab_nom_activite[100][
     switch (choix)
     {
         case 1 :
-            clean;
+            clean
             creer_activite(Tab_numero_activite,  Tab_nom_activite, Tab_tarif_activite, Tab_nbr_entree_activite, nbActivite);
             break;
 
@@ -50,19 +50,19 @@ void modif_crea_activite(int Tab_numero_activite[], char  Tab_nom_activite[100][
             break;
 
          case 2 : 
-            clean;
+            clean
             modifier_activite(Tab_numero_activite,  Tab_nom_activite, Tab_tarif_activite, Tab_nbr_entree_activite, nbActivite);
             break;
 
          case 4 : 
-            clean;    
+            clean
             printf("=================================================================================\n");
             printf("                       Affichage des activites \n");
             printf("=================================================================================\n\n\n");
             affichage_activite( Tab_numero_activite,  Tab_tarif_activite, Tab_nom_activite, nbActivite,  Tab_nbr_entree_activite);
 
             char trash;
-            wait;
+            wait
             break;
 
         case 0 : return;
@@ -128,7 +128,7 @@ void creer_activite(int Tab_numero_activite[], char  Tab_nom_activite[100][20], 
             nbActivite = nbActivite +1;
 
 
-            clean;
+            clean
             printf("=================================================================================\n");
             printf("                            Creer une activite\n");
             printf("=================================================================================\n\n"); 
@@ -157,7 +157,7 @@ void creer_activite(int Tab_numero_activite[], char  Tab_nom_activite[100][20], 
                 }
             }      
 
-            clean;
+            clean
             printf("=================================================================================\n");
             printf("                            Creer une activite\n");
             printf("=================================================================================\n"); 
@@ -170,7 +170,7 @@ void creer_activite(int Tab_numero_activite[], char  Tab_nom_activite[100][20], 
 
             Tab_tarif_activite[position] = valeur_temp;
 
-            clean;
+            clean
             printf("=================================================================================\n");
             printf("                            Creer une activite\n");
             printf("=================================================================================\n\n"); 
@@ -182,7 +182,7 @@ void creer_activite(int Tab_numero_activite[], char  Tab_nom_activite[100][20], 
         affichage_activite( Tab_numero_activite,  Tab_tarif_activite, Tab_nom_activite, nbActivite,  Tab_nbr_entree_activite);
 
         char trash;
-        wait;
+        wait
 
 
 }
@@ -287,7 +287,7 @@ void modifier_activite(int Tab_numero_activite[], char  Tab_nom_activite[100][20
             printf(" - Votre reponse : ");
             scanf("%s%*c", Tab_nom_activite[position]);
         }
-        clean;
+        clean
         printf("=================================================================================\n");
         printf("                            Modifier une activite\n");
          printf("=================================================================================\n\n\n"); 
@@ -330,7 +330,7 @@ void modifier_activite(int Tab_numero_activite[], char  Tab_nom_activite[100][20
             }
         } 
 
-        clean;
+        clean
         printf("=================================================================================\n");
         printf("                            Modifier une activite\n");
         printf("=================================================================================\n\n\n"); 
@@ -362,7 +362,7 @@ void modifier_activite(int Tab_numero_activite[], char  Tab_nom_activite[100][20
          
         } 
 
-        clean;
+        clean
         printf("=================================================================================\n");
         printf("                            Modifier une activite\n");
         printf("=================================================================================\n\n\n");
@@ -375,7 +375,7 @@ void modifier_activite(int Tab_numero_activite[], char  Tab_nom_activite[100][20
         affichage_activite( Tab_numero_activite,  Tab_tarif_activite, Tab_nom_activite, nbActivite,  Tab_nbr_entree_activite);
 
         char trash;
-        wait;
+        wait
 
 
 }
@@ -392,7 +392,7 @@ void modifier_activite(int Tab_numero_activite[], char  Tab_nom_activite[100][20
  */
 void supprimer_activite(int Tab_numero_activite[], char  Tab_nom_activite[100][20], int Tab_tarif_activite[], int Tab_nbr_entree_activite[], int nbActivite)
 {
-    clean;
+    clean
     printf("=================================================================================\n");
     printf("                          Supprimer une activite\n");
     printf("=================================================================================\n\n\n"); 
@@ -460,7 +460,7 @@ void supprimer_activite(int Tab_numero_activite[], char  Tab_nom_activite[100][2
 
             Tab_numero_activite[position] =  0;
 
-        clean;
+        clean
     printf("=================================================================================\n");
     printf("                          Supprimer une activite\n");
     printf("=================================================================================\n");
@@ -520,7 +520,7 @@ void affichage_activite( int Tab_numero_activite[], int Tab_tarif_activite[], ch
 void Gestion_activite(int  Tab_numero_activite[], int Tab_tarif_activite[],int  Tab_nbr_entree_activite[],int  Tab_numero_carte_adherent[], int  Tab_Etat_carte[], int  Tab_credit_carte[], int  Tab_Presence_adherent[], int nbr_activite, int nbAdherents,  char Tab_nom_activite[100][20],  int Tab_nb_activite_adherent[100])
 {
     char reponse ='g';
-    clean;
+    clean
 
 
     int num_adherant = 0, activite = 0, verif = 0, i = 1;
@@ -581,7 +581,7 @@ void Gestion_activite(int  Tab_numero_activite[], int Tab_tarif_activite[],int  
     {
         printf("\n\n ---> L'adherent a fait ses 3 activites maximum dans la journee. Il doit attendre demain pour recommencer\n\n");
         char trash;
-        wait;
+        wait
     }
 
 }
@@ -606,7 +606,7 @@ void Gestion_activite(int  Tab_numero_activite[], int Tab_tarif_activite[],int  
 int effectuer_activite(int num_adherant, int  Tab_numero_activite[], int Tab_tarif_activite[],int  Tab_nbr_entree_activite[],int  Tab_numero_carte_adherent[], int  Tab_Etat_carte[], int  Tab_credit_carte[], int  Tab_Presence_adherent[], int nbr_activite, int nbAdherents,  char Tab_nom_activite[100][20],  int Tab_nb_activite_adherent[100])
 {
     
-    clean;
+    clean
     printf("================================================================\n");
     printf("                  Effectuer une Activite\n");
     printf("================================================================\n\n\n");
@@ -652,7 +652,7 @@ int effectuer_activite(int num_adherant, int  Tab_numero_activite[], int Tab_tar
         if ( reponse == 'n' || reponse == 'N') return -6;
         else
         {
-        clean;
+        clean
         printf("================================================================\n");
         printf("                  Effectuer une Activite\n");
         printf("================================================================\n\n\n");

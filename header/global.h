@@ -4,7 +4,6 @@
 
 #ifdef 	__linux__
 #define clean   system("clear");
-
 /*
 #define color   system("tempPS1=&PS1"); \
                 system("PS1='\\e'")
